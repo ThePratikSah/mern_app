@@ -1,8 +1,8 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import DeliveryForm from "./DeliveryForm";
-import BuyForMe from "./BuyForMe";
-import NavBar from "./NavBar";
+import DeliveryForm from "./components/deliveryForm/DeliveryForm";
+import BuyForMe from "./components/buyForMe/BuyForMe";
+import NavBar from "./components/ui/navbar/NavBar";
 
 function App() {
   return (
