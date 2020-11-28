@@ -53,6 +53,8 @@ app.use(
   }).single('image')
 );
 
+//
+const __dirname = path.resolve();
 app.use('/images', express.static(path.join(__dirname, 'images')));
 
 //cors error function
