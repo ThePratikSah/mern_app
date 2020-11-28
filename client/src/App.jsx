@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import DeliveryForm from "./components/deliveryForm/DeliveryForm";
 import BuyForMe from "./components/buyForMe/BuyForMe";
 import NavBar from "./components/ui/navbar/NavBar";
+import Features from "./components/ui/navbar/Features";
 
 function App() {
   return (
@@ -20,6 +21,8 @@ function App() {
           <Route path="/buy" component={BuyForMe} />
         </Switch>
       </div>
+      {/* features section */}
+      <Features />
       {/* footer */}
     </Router>
   );
