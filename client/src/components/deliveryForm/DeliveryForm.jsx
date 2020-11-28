@@ -5,12 +5,18 @@ function DeliveryForm() {
   return (
     <div className={classes.DeliveryForm}>
       <h1 className={classes.DeliveryForm__header}>Make Delivery Request</h1>
+      <span className={classes.DeliveryForm__headerSpan}>
+        Our delivery agent will go through the below location and pickup the
+        product
+      </span>
       <form>
         <div className={classes.form__group}>
           <div className={classes.form}>
             {/* from location */}
             <div className={classes.DeliveryFrom__inputGroup}>
-              <label className={classes.DeliveryForm__label}>Pickup Location</label>
+              <label className={classes.DeliveryForm__label}>
+                Pickup Location
+              </label>
               <input
                 type="text"
                 placeholder="Street or Locality"
@@ -19,7 +25,9 @@ function DeliveryForm() {
             </div>
             {/* contact of sender */}
             <div className={classes.DeliveryFrom__inputGroup}>
-              <label className={classes.DeliveryForm__label}>Your Contact</label>
+              <label className={classes.DeliveryForm__label}>
+                Your Contact
+              </label>
               <input
                 type="tel"
                 placeholder="9191919191"
@@ -39,7 +47,9 @@ function DeliveryForm() {
           <div className={classes.form}>
             {/* to location */}
             <div className={classes.DeliveryFrom__inputGroup}>
-              <label className={classes.DeliveryForm__label}>Drop Location</label>
+              <label className={classes.DeliveryForm__label}>
+                Drop Location
+              </label>
               <input
                 type="text"
                 placeholder="Street or Locality"
@@ -48,7 +58,9 @@ function DeliveryForm() {
             </div>
             {/* contact of receiver */}
             <div className={classes.DeliveryFrom__inputGroup}>
-              <label className={classes.DeliveryForm__label}>Receiver's Contact</label>
+              <label className={classes.DeliveryForm__label}>
+                Receiver's Contact
+              </label>
               <input
                 type="tel"
                 placeholder="9191919191"
@@ -57,7 +69,9 @@ function DeliveryForm() {
             </div>
             {/* name of receiver */}
             <div className={classes.DeliveryFrom__inputGroup}>
-              <label className={classes.DeliveryForm__label}>Receiver's Name</label>
+              <label className={classes.DeliveryForm__label}>
+                Receiver's Name
+              </label>
               <input
                 type="text"
                 placeholder="Mr."
