@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import DeliveryForm from "./components/deliveryForm/DeliveryForm";
 import BuyForMe from "./components/buyForMe/BuyForMe";
 import NavBar from "./components/ui/navbar/NavBar";
-import Features from "./components/ui/navbar/Features";
+import Features from "./components/ui/features/Features";
 
 function App() {
   return (
