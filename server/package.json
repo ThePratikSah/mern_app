@@ -2,13 +2,14 @@
   "name": "rest_api",
   "version": "1.0.0",
   "description": "REST API",
-  "main": "app.mjs",
+  "main": "app.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "concurrently \"npm run start-dev\" \"npm run client\"",
     "client-install": "npm install --prefix client",
-    "start": "node app.mjs",
-    "start-dev": "nodemon app.mjs"
+    "start": "node app.js",
+    "start-dev": "nodemon app.js"
   },
   "author": "Shashank Biplav",
   "license": "ISC",

@@ -19,6 +19,7 @@ const port = process.env.PORT || 3300;
 const app = express();
 
 //All routes imported here
+import authRoutes from './routes/auth-routes.js';
 
 //multer file storage
 const fileStorage = multer.diskStorage({
@@ -67,6 +68,8 @@ app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
   next();
 });
+//Entry point for routes
+app.use('/auth', authRoutes);
 
 app.use(helmet());
 
