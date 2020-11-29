@@ -15,6 +15,17 @@
   border-radius: 5px;
 }
 
+.LocationPoint__suggestionList {
+  position: absolute;
+  z-index: 100;
+}
+
+.LocationPoint__mainForm {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
 .LocationPoint__inputGroup {
   margin-bottom: 20px;
 }
@@ -41,24 +52,76 @@
   padding: 10px 20px;
   border-radius: 5px;
   border: 1px solid #7a29e4;
-  color: #7a29e4;
-  background-color: #fff;
+  color: #fff;
+  background-color: #7a29e4;
   transition: ease-in-out 0.3s;
   cursor: pointer;
   outline: none;
 }
 .LocationPoint__button:hover {
-  background-color: #7a29e4;
-  color: #fff;
+  background-color: #fff;
+  color: #7a29e4;
 }
 
 .LocationPoint__fetchPrice {
   display: flex;
+  justify-content: center;
+  width: 200px;
   align-items: center;
   background-color: #7a29e4;
   color: #fff;
-  width: 140px;
   justify-content: center;
   border-radius: 5px;
   height: 40px;
+}
+.LocationPoint__fetchPriceSpan {
+  padding: 10px 20px;
+}
+
+/* css for desktop */
+@media only screen and (min-width: 600px) {
+  .LocationPoint {
+    margin: 20px;
+    flex-direction: row;
+  }
+  .LocationPoint__imageDiv {
+    display: flex;
+    flex: 1;
+    align-items: center;
+  }
+  .LocationPoint__formArea {
+    flex: 1;
+  }
+  .LocationPoint__submitBtnGroup {
+    justify-content: flex-start !important;
+  }
+}
+
+@media only screen and (min-width: 900px) {
+  .LocationPoint__imageDiv {
+    display: flex;
+    flex: 1.2;
+    align-items: center;
+  }
+  .LocationPoint__formArea {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+  }
+  .LocationPoint__submitBtnGroup {
+    justify-content: center !important;
+  }
+}
+
+@media only screen and (min-width: 900px) {
+  .LocationPoint__imageDiv {
+    display: flex;
+    flex: 2;
+    align-items: center;
+  }
+  .LocationPoint__formArea {
+    flex: 1.5;
+    padding: 30px;
+  }
 }

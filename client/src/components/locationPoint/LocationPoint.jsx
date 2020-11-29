@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import classes from "./LocationPoint.module.css";
 import deliverImg from "../../img/deliver.png";
 
@@ -10,7 +10,15 @@ import PlacesAutoComplete, {
 function LocationPoint() {
   const [initialAddress, setInitialAddress] = useState("");
   const [finalAddress, setFinalAddress] = useState("");
-  const [distance, setDistance] = useState("");
+  const [distance, setDistance] = useState({ text: "", value: 0 });
+
+  useEffect(() => {
+    document.querySelector("#distance").innerHTML = `Book Now@ ${
+      distance["value"] <= 5000
+        ? 40
+        : 40 + ((distance["value"] - 5000) / 1000) * 10
+    }₹`;
+  });
 
   const [initialCoordinates, setInitialCoordinates] = useState({
     lat: null,
@@ -70,8 +78,8 @@ function LocationPoint() {
       <div className={classes.LocationPoint__imageDiv}>
         <img className={classes.LocationPoint__image} src={deliverImg} alt="" />
       </div>
-      <div>
-        <div>
+      <div className={classes.LocationPoint__formArea}>
+        <div className={classes.LocationPoint__mainForm}>
           <PlacesAutoComplete
             value={initialAddress}
             onChange={setInitialAddress}
@@ -94,7 +102,7 @@ function LocationPoint() {
 
                 <div className={classes.LocationPoint__suggestionList}>
                   {loading ? <div>...loading</div> : null}
-                  {suggestions.map((suggestion, index) => {
+                  {suggestions.map((suggestion) => {
                     const style = {
                       backgroundColor: suggestion.active ? "#7a29e4" : "#fff",
                       color: suggestion.active ? "#fff" : "#1e1e1e",
@@ -150,10 +158,11 @@ function LocationPoint() {
           </PlacesAutoComplete>
           <div className={classes.LocationPoint__submitBtnGroup}>
             <button
+              onClick={fetchLocation}
+              id="distance"
               className={classes.LocationPoint__button}
-              onClick={() => fetchLocation()}
             >
-              Book Now
+              Book Now {distance["text"]}
             </button>
           </div>
         </div>

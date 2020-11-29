@@ -47,15 +47,15 @@
   padding: 10px 20px;
   border-radius: 5px;
   border: 1px solid #7a29e4;
-  color: #7a29e4;
-  background-color: #fff;
+  color: #fff;
+  background-color: #7a29e4;
   transition: ease-in-out 0.3s;
   cursor: pointer;
   outline: none;
 }
 .BuyForMe__submitBtn:hover {
-  background-color: #7a29e4;
-  color: #fff;
+  background-color: #fff;
+  color: #7a29e4;
 }
 
 @media only screen and (min-width: 600px) {
