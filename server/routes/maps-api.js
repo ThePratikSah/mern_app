@@ -4,7 +4,7 @@ import * as mapController from '../controllers/maps-api-controller.js';
 
 const router = express.Router();
 
-router.get('/fetch', mapController.apiRequest );
+router.post('/fetch', mapController.apiRequest );
 
 export default router;
 
