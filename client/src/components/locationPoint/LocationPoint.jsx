@@ -10,6 +10,7 @@ import PlacesAutoComplete, {
 function LocationPoint() {
   const [initialAddress, setInitialAddress] = useState("");
   const [finalAddress, setFinalAddress] = useState("");
+  const [distance, setDistance] = useState("");
 
   const [initialCoordinates, setInitialCoordinates] = useState({
     lat: null,
@@ -56,7 +57,8 @@ function LocationPoint() {
           }),
         });
         const json = await res.json();
-        console.log(json);
+        console.log(json["rows"][0]["elements"][0]["distance"]);
+        setDistance(json["rows"][0]["elements"][0]["distance"]);
       }
     } catch (e) {
       console.log(e.message);
@@ -157,7 +159,7 @@ function LocationPoint() {
         </div>
       </div>
       <div className={classes.LocationPoint__fetchPrice}>
-        <span>Amount: ₹30/-</span>
+        <span>Distance {distance["text"]}</span>
       </div>
     </div>
   );
