@@ -14,9 +14,9 @@ function Features() {
             </span>
           </div>
           <div className={classes.Features__groupChild}>
-            <h2 className={classes.Features__groupChildHeader}>₹40</h2>
+            <h2 className={classes.Features__groupChildHeader}>₹40<sup>*</sup></h2>
             <span className={classes.Features__groupChildSpan}>
-              Price staring as low as ₹8/km in Delhi/NCR
+              Fare staring as low as ₹10/km after first 5km within Delhi/NCR
             </span>
           </div>
           <div className={classes.Features__groupChild}>

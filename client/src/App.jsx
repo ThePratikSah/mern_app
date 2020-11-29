@@ -20,6 +20,7 @@ function App() {
           <Route exact path="/" component={LocationPoint} />
           {/* product delivery */}
           <Route path="/buy" component={BuyForMe} />
+          <Route path="/track" component={BuyForMe} />
         </Switch>
       </div>
       {/* features section */}

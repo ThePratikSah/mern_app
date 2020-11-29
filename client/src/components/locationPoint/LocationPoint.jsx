@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react";
 import classes from "./LocationPoint.module.css";
-import deliverImg from "../../img/deliver.png";
+import deliverImg from "../../img/deliver.svg";
 
 import PlacesAutoComplete, {
   geocodeByAddress,
