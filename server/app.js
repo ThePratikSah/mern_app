@@ -1,5 +1,6 @@
 //node core modules
 import path from 'path';
+import https from 'https';
 
 //installed modules
 import express from 'express';
@@ -74,6 +75,22 @@ app.use('/auth', authRoutes);
 app.use(helmet());
 
 app.use(compression());
+
+app.get('/fetch', (req, res) => {
+  const url = "https://maps.googleapis.com/maps/api/distancematrix/json?origins=28.5550838,77.0844015&destinations=28.5561624,77.0999578&mode=driving&language=en-EN&sensor=false&key=AIzaSyCCwXhF5unk2wA2q3KGAoB6sy7UTSOOKhQ";
+  https.get(url, (response) => {
+    if (response.statusCode === 200) {
+      response.on("data", (data) => {
+        const distanceData = JSON.parse(data);
+        // res.render('index', {data: weatherData});
+        console.log(distanceData['rows'][0]['elements'][0]['distance']);
+        res.send(distanceData);
+      })
+    } else {
+      // res.render('index', {data: "0"})
+    }
+  })
+})
 
 //central error handling middleware
 app.use((error, req, res, next) => {

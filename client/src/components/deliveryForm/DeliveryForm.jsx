@@ -1,7 +1,7 @@
-import React from 'react';
-import { connect } from 'react-redux';
+import React from "react";
+import { connect } from "react-redux";
 
-import classes from './DeliveryForm.module.css';
+import classes from "./DeliveryForm.module.css";
 
 function DeliveryForm() {
   return (
@@ -95,8 +95,8 @@ function DeliveryForm() {
 }
 
 const mapStateToProps = (state) => {
-  return{
-     auth: state.isAuthenticated
+  return {
+    auth: state.isAuthenticated,
   };
 };
 

@@ -1,21 +1,20 @@
 const initialState = {
-    isAuthenticated:false,
+  isAuthenticated: false,
 };
 
-const reducer = (store = initialState, action) =>{
-    switch(action.type){
-        case 'AUTHENTICATED':
-            return {
-                isAuth: true
-            }
-        case 'NOT-AUTHENTICATED':
-            {
-                return {
-                    isAuthenticated: false
-                }
-            }
+const reducer = (state = initialState, action) => {
+  switch (action.type) {
+    case "AUTHENTICATED":
+      return {
+        isAuth: true,
+      };
+    case "NOT-AUTHENTICATED": {
+      return {
+        isAuthenticated: false,
+      };
     }
-    return state;
+  }
+  return state;
 };
 
 export default reducer;
