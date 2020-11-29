@@ -12,7 +12,7 @@
 
 .Features__group {
   margin: 0 auto;
-  padding: 30px;
+  padding: 20px;
 }
 
 .Features__groupChild {
@@ -45,11 +45,17 @@
     font-weight: 400;
   }
   .Features__group {
-    width: 80%;
+    width: 100%;
     display: flex;
   }
   .Features__groupChild {
     border: 1.5px solid #1e1e1e;
     margin: 10px;
+  }
+}
+
+@media only screen and (min-width: 900px) {
+  .Features__group {
+    width: 80%;
   }
 }
