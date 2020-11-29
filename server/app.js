@@ -22,6 +22,8 @@ const app = express();
 //All routes imported here
 import authRoutes from './routes/auth-routes.js';
 
+import mapRoutes from './routes/maps-api.js';
+
 //multer file storage
 const fileStorage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -76,22 +78,7 @@ app.use(helmet());
 
 app.use(compression());
 
-app.get('/fetch', (req, res) => {
-  const key = process.env.GOOGLE_API_KEY;
-  const url = `https://maps.googleapis.com/maps/api/distancematrix/json?origins=28.5550838,77.0844015&destinations=28.5561624,77.0999578&mode=driving&language=en-EN&sensor=false&key=${key}`;
-  https.get(url, (response) => {
-    if (response.statusCode === 200) {
-      response.on("data", (data) => {
-        const distanceData = JSON.parse(data);
-        // res.render('index', {data: weatherData});
-        console.log(distanceData['rows'][0]['elements'][0]['distance']);
-        res.send(distanceData);
-      })
-    } else {
-      // res.render('index', {data: "0"})
-    }
-  })
-})
+app.use('/map', mapRoutes);
 
 //central error handling middleware
 app.use((error, req, res, next) => {
