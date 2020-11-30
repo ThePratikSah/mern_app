@@ -111,11 +111,13 @@ function LocationPoint() {
                     const style = {
                       backgroundColor: suggestion.active ? "#7a29e4" : "#fff",
                       color: suggestion.active ? "#fff" : "#1e1e1e",
+                      cursor: "pointer",
+                      padding: "10px"
                     };
                     
                     return (
                       <div {...getSuggestionItemProps(suggestion, {style})}>
-                        {suggestion.description}
+                        {suggestion.description.length > 60 ? suggestion.description.substring(0, 61) + "..." : suggestion.description}
                       </div>
                     );
                   })}
@@ -150,10 +152,12 @@ function LocationPoint() {
                     const style = {
                       backgroundColor: suggestion.active ? "#7a29e4" : "#fff",
                       color: suggestion.active ? "#fff" : "#1e1e1e",
+                      cursor: "pointer",
+                      padding: "10px"
                     };
                     return (
                       <div {...getSuggestionItemProps(suggestion, {style})}>
-                        {suggestion.description}
+                        {suggestion.description.length > 60 ? suggestion.description.substring(0, 61) + "..." : suggestion.description}
                       </div>
                     );
                   })}
