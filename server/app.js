@@ -24,6 +24,10 @@ import authRoutes from './routes/auth-routes.js';
 
 import mapRoutes from './routes/maps-api.js';
 
+import adminRoutes from './routes/admin-routes.js';
+
+import userRoutes from './routes/user-routes.js';
+
 //multer file storage
 const fileStorage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -73,6 +77,10 @@ app.use((req, res, next) => {
 });
 //Entry point for routes
 app.use('/auth', authRoutes);
+
+app.use('/admin',adminRoutes);
+
+app.use('/user',userRoutes);
 
 app.use(helmet());
 
