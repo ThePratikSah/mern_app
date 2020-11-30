@@ -1,8 +1,8 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import LocationPoint from "./components/locationPoint/LocationPoint";
-import DeliveryForm from "./components/deliveryForm/DeliveryForm";
-import BuyForMe from "./components/buyForMe/BuyForMe";
+import LocationPoint from "./containers/locationPoint/LocationPoint";
+import DeliveryForm from "./containers/deliveryForm/DeliveryForm";
+import BuyForMe from "./containers/buyForMe/BuyForMe";
 import NavBar from "./components/ui/navbar/NavBar";
 import Features from "./components/ui/features/Features";
 

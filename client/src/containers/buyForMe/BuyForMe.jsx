@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import classes from "./BuyForMe.module.css";
-import Button from "../ui/button/Button";
-import InputComponent from "../ui/InputComponent/InputComponent.";
+import Button from "../../components/ui/button/Button";
+import InputComponent from "../../components/ui/InputComponent/InputComponent.";
 import {geocodeByAddress, getLatLng} from "react-places-autocomplete";
 import InputPlacesComponent from "../locationPoint/InputPlacesComponent/InputPlacesComponent";
 

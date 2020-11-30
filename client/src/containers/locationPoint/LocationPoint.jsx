@@ -1,13 +1,14 @@
 import React, {useState, useEffect} from "react";
 import classes from "./LocationPoint.module.css";
 import deliverImg from "../../img/deliver.svg";
-import Button from "../ui/button/Button";
+import Button from "../../components/ui/button/Button";
 
 import PlacesAutoComplete, {
   geocodeByAddress,
   getLatLng,
 } from "react-places-autocomplete";
 import InputPlacesComponent from "./InputPlacesComponent/InputPlacesComponent";
+import PriceComponent from "../../components/ui/PriceComponent/PriceComponent.";
 
 function LocationPoint() {
   //states
@@ -15,13 +16,13 @@ function LocationPoint() {
   const [finalAddress, setFinalAddress] = useState("");
   const [distance, setDistance] = useState({text: "", value: 0});
 
-  useEffect(() => {
-    document.querySelector("#distance").innerHTML = `Book Now @ ${
-      distance["value"] <= 5000
-        ? 40
-        : 40 + ((distance["value"] - 5000) / 1000) * 10
-    }₹`;
-  });
+  // useEffect(() => {
+  //   document.querySelector("#distance").innerHTML = `Book Now @ ${
+  //     distance["value"] <= 5000
+  //       ? 40
+  //       : 40 + ((distance["value"] - 5000) / 1000) * 10
+  //   }₹`;
+  // });
 
   const [initialCoordinates, setInitialCoordinates] = useState({
     lat: null,
@@ -107,12 +108,9 @@ function LocationPoint() {
           />
 
           <div className={classes.LocationPoint__submitBtnGroup}>
-            <Button onClick={fetchLocation} id={"distance"} text={`Book Now ${distance['text']}`}/>
+            <Button onClick={fetchLocation} id={"distance"} text={`Book Now`}/>
           </div>
         </div>
-      </div>
-      <div className={classes.LocationPoint__fetchPrice}>
-        <span>Distance {distance["text"]}</span>
       </div>
     </div>
   );
