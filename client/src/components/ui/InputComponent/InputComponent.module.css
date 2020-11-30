@@ -1,0 +1,23 @@
+.DeliveryFrom__inputGroup {
+  margin-bottom: 10px;
+}
+
+.DeliveryForm__label {
+  font-weight: 500;
+}
+
+
+.InputComponent {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 5px;
+  border: 0.5px #1e1e1e solid;
+  outline: none;
+}
+@media only screen and (min-width: 600px) {
+  .InputComponent {
+    border: 1px solid #1e1e1e;
+  }
+}
