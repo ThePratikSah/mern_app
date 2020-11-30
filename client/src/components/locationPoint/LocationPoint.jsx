@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from "react";
 import classes from "./LocationPoint.module.css";
 import deliverImg from "../../img/deliver.svg";
+import Button from "../ui/button/Button";
 
 import PlacesAutoComplete, {
   geocodeByAddress,
@@ -12,7 +13,7 @@ function LocationPoint() {
   const [initialAddress, setInitialAddress] = useState("");
   const [finalAddress, setFinalAddress] = useState("");
   const [distance, setDistance] = useState({text: "", value: 0});
-  
+
   useEffect(() => {
     document.querySelector("#distance").innerHTML = `Book Now @ ${
       distance["value"] <= 5000
@@ -20,24 +21,24 @@ function LocationPoint() {
         : 40 + ((distance["value"] - 5000) / 1000) * 10
     }₹`;
   });
-  
+
   const [initialCoordinates, setInitialCoordinates] = useState({
     lat: null,
     lng: null,
   });
-  
+
   const [finalCoordinates, setFinalCoordinates] = useState({
     lat: null,
     lng: null,
   });
-  
+
   const initialHandleSelect = async (valueInitial) => {
     const resInitial = await geocodeByAddress(valueInitial);
     let latLngInitial = await getLatLng(resInitial[0]);
     setInitialAddress(valueInitial);
     setInitialCoordinates(latLngInitial);
   };
-  
+
   const finalHandleSelect = async (valueFinal) => {
     const resFinal = await geocodeByAddress(valueFinal);
     let latLngFinal = await getLatLng(resFinal[0]);
@@ -77,7 +78,7 @@ function LocationPoint() {
       console.log(e.message);
     }
   };
-  
+
   return (
     <div className={classes.LocationPoint}>
       <div className={classes.LocationPoint__imageDiv}>
@@ -104,7 +105,7 @@ function LocationPoint() {
                        className={classes.LocationPoint__input}
                        {...getInputProps({placeholder: "Enter location"})}
                 />
-                
+
                 <div className={classes.LocationPoint__suggestionList}>
                   {loading ? <div>...loading</div> : null}
                   {suggestions.map((suggestion) => {
@@ -114,7 +115,7 @@ function LocationPoint() {
                       cursor: "pointer",
                       padding: "10px"
                     };
-                    
+
                     return (
                       <div {...getSuggestionItemProps(suggestion, {style})}>
                         {suggestion.description.length > 60 ? suggestion.description.substring(0, 61) + "..." : suggestion.description}
@@ -125,7 +126,7 @@ function LocationPoint() {
               </div>
             )}
           </PlacesAutoComplete>
-          
+
           {/* final point location pickup */}
           <PlacesAutoComplete
             value={finalAddress}
@@ -166,13 +167,7 @@ function LocationPoint() {
             )}
           </PlacesAutoComplete>
           <div className={classes.LocationPoint__submitBtnGroup}>
-            <button
-              onClick={fetchLocation}
-              id="distance"
-              className={classes.LocationPoint__button}
-            >
-              Book Now {distance["text"]}
-            </button>
+            <Button onClick={fetchLocation} id={"distance"} text={`Book Now ${distance['text']}`}/>
           </div>
         </div>
       </div>
