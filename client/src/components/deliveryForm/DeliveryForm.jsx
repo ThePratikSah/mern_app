@@ -20,7 +20,7 @@ function DeliveryForm() {
             {/* contact of sender */}
             <InputComponent labelText={"Your Contact"} type={"tel"} placeholder={"9876543210"}/>
             {/* name of sender */}
-            <InputComponent labelText={"Your Name"} type={"text"} placeholder={"Mr."}/>
+            <InputComponent labelText={"Your Name"} type={"text"} placeholder={"Mr/Miss"}/>
           </div>
           <div className={classes.form}>
             {/* from location */}
@@ -28,7 +28,7 @@ function DeliveryForm() {
             {/* contact of sender */}
             <InputComponent labelText={"Receiver's Contact"} type={"tel"} placeholder={"9876543210"}/>
             {/* name of sender */}
-            <InputComponent labelText={"Receiver's Name"} type={"text"} placeholder={"Mr."}/>
+            <InputComponent labelText={"Receiver's Name"} type={"text"} placeholder={"Mr/Miss"}/>
           </div>
         </div>
         <div className={classes.DeliveryForm__submit}>

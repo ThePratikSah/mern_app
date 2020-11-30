@@ -21,7 +21,7 @@ function InputPlacesComponent({value, onChange, onSelect, labelText, inputId}) {
           </label>
           <input id={inputId}
                  className={classes.LocationPoint__input}
-                 {...getInputProps({placeholder: "Enter location"})}
+                 {...getInputProps({placeholder: "Choose location"})}
           />
 
           <div className={classes.LocationPoint__suggestionList}>
