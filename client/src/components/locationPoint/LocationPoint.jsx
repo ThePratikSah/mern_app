@@ -45,13 +45,13 @@ function LocationPoint() {
     setFinalCoordinates(latLngFinal);
     console.log(latLngFinal);
   };
-  //fetching location : from server
   const fetchLocation = async () => {
     try {
       const inputFieldOrigin = document.querySelector('#originId').value;
       const inputFieldDestination = document.querySelector('#destinationId').value;
       if ((inputFieldOrigin !== null && inputFieldOrigin !== "") && (inputFieldDestination !== null && inputFieldDestination !== "")) {
-        const res = await fetch("http://localhost:3300/map/fetch", {
+        // alert("Thanks");
+        const res = await fetch("https://delivery-nodejs.herokuapp.com/map/fetch", {
           headers: {
             "Content-Type": "application/json",
           },
