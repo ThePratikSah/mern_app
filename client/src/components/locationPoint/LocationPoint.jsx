@@ -7,6 +7,7 @@ import PlacesAutoComplete, {
   geocodeByAddress,
   getLatLng,
 } from "react-places-autocomplete";
+import InputPlacesComponent from "./InputPlacesComponent/InputPlacesComponent";
 
 function LocationPoint() {
   //states
@@ -86,86 +87,25 @@ function LocationPoint() {
       </div>
       <div className={classes.LocationPoint__formArea}>
         <div className={classes.LocationPoint__mainForm}>
-          <PlacesAutoComplete
+
+          {/* initial point location pickup */}
+          <InputPlacesComponent
             value={initialAddress}
             onChange={setInitialAddress}
             onSelect={initialHandleSelect}
-          >
-            {({
-                getInputProps,
-                suggestions,
-                getSuggestionItemProps,
-                loading,
-              }) => (
-              <div className={classes.LocationPoint__inputGroup}>
-                <label className={classes.LocationPoint__label}>
-                  Pickup Point
-                </label>
-                <input id="originId"
-                       className={classes.LocationPoint__input}
-                       {...getInputProps({placeholder: "Enter location"})}
-                />
+            labelText={"Pickup Point"}
+            inputId={"originId"}
+          />
 
-                <div className={classes.LocationPoint__suggestionList}>
-                  {loading ? <div>...loading</div> : null}
-                  {suggestions.map((suggestion) => {
-                    const style = {
-                      backgroundColor: suggestion.active ? "#7a29e4" : "#fff",
-                      color: suggestion.active ? "#fff" : "#1e1e1e",
-                      cursor: "pointer",
-                      padding: "10px"
-                    };
-
-                    return (
-                      <div {...getSuggestionItemProps(suggestion, {style})}>
-                        {suggestion.description.length > 60 ? suggestion.description.substring(0, 61) + "..." : suggestion.description}
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-            )}
-          </PlacesAutoComplete>
-
-          {/* final point location pickup */}
-          <PlacesAutoComplete
+          {/* final point location drop */}
+          <InputPlacesComponent
             value={finalAddress}
             onChange={setFinalAddress}
             onSelect={finalHandleSelect}
-          >
-            {({
-                getInputProps,
-                suggestions,
-                getSuggestionItemProps,
-                loading,
-              }) => (
-              <div className={classes.LocationPoint__inputGroup}>
-                <label className={classes.LocationPoint__label}>
-                  Dropping Point
-                </label>
-                <input id="destinationId"
-                       className={classes.LocationPoint__input}
-                       {...getInputProps({placeholder: "Enter location"})}
-                />
-                <div className={classes.LocationPoint__suggestionList}>
-                  {loading ? <div>...loading</div> : null}
-                  {suggestions.map((suggestion) => {
-                    const style = {
-                      backgroundColor: suggestion.active ? "#7a29e4" : "#fff",
-                      color: suggestion.active ? "#fff" : "#1e1e1e",
-                      cursor: "pointer",
-                      padding: "10px"
-                    };
-                    return (
-                      <div {...getSuggestionItemProps(suggestion, {style})}>
-                        {suggestion.description.length > 60 ? suggestion.description.substring(0, 61) + "..." : suggestion.description}
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-            )}
-          </PlacesAutoComplete>
+            labelText={"Dropping Point"}
+            inputId={"destinationId"}
+          />
+
           <div className={classes.LocationPoint__submitBtnGroup}>
             <Button onClick={fetchLocation} id={"distance"} text={`Book Now ${distance['text']}`}/>
           </div>

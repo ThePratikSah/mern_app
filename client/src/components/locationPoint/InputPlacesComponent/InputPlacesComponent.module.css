@@ -1,0 +1,19 @@
+.LocationPoint__inputGroup {
+  margin-bottom: 20px;
+}
+.LocationPoint__label {
+  margin-bottom: 10px;
+  display: block;
+}
+.LocationPoint__input {
+  padding: 10px;
+  width: 100%;
+  border: 1px solid #1e1e1e;
+  border-radius: 5px;
+  outline: none;
+}
+
+.LocationPoint__suggestionList {
+  position: absolute;
+  z-index: 100;
+}

@@ -1,5 +1,6 @@
 import React from "react";
 import classes from "./BuyForMe.module.css";
+import Button from "../ui/button/Button";
 
 function BuyForMe() {
   return (
@@ -68,9 +69,7 @@ function BuyForMe() {
           </div>
         </div>
         <div className={classes.BuyForMe__submit}>
-          <button className={classes.BuyForMe__submitBtn}>
-            Proceed to pay
-          </button>
+          <Button onClick={() => {}} text={"Proceed to pay"} id={"btn"}/>
         </div>
       </form>
     </div>
