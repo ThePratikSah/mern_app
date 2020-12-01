@@ -9,8 +9,8 @@
 
 .WeightComponent > span {
   padding: 10px 20px;
-  background-color: #7a29e4;
-  color: #ffffff;
+  color: #7a29e4;
+  background-color: #ffffff;
   border: 1px solid #7a29e4;
   margin: 10px 10px 10px 0;
   border-radius: 5px;
@@ -19,8 +19,8 @@
 }
 
 .WeightComponent > span:hover {
-  background-color: #ffffff;
-  color: #7a29e4;
+  color: #ffffff;
+  background-color: #7a29e4;
 }
 
 @media only screen and (min-width: 600px) {
