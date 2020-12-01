@@ -34,6 +34,17 @@
   outline: none;
 }
 
+.DateTime__customCss {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #1e1e1e;
+  border-radius: 5px;
+}
+
+.DateTime__customCss > div {
+  border: none !important;
+}
+
 .DeliveryForm__submitBtn {
   padding: 10px 20px;
   border-radius: 5px;

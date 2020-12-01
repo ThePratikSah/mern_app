@@ -16,6 +16,7 @@
 }
 
 .Features__groupChild {
+  cursor: pointer;
   width: 100%;
   border: 1px solid #1e1e1e;
   padding: 20px;

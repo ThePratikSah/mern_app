@@ -1,0 +1,15 @@
+.DateTime__customCss {
+  width: 100%;
+  padding: 5px;
+  border: 0.5px solid #1e1e1e;
+  border-radius: 5px;
+}
+
+.DateTime__customCss > div {
+  border: none !important;
+}
+
+.DateTime__customCssLabel {
+  display: inline-block;
+  margin-bottom: 10px;
+}
