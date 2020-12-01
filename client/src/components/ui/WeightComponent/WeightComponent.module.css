@@ -23,8 +23,8 @@
   color: #7a29e4;
 }
 
-/*@media only screen and (min-width: 600px) {*/
-/*  .WeightComponent {*/
-/*    !*flex-wrap: nowrap;*!*/
-/*  }*/
-/*}*/
+@media only screen and (min-width: 600px) {
+  .WeightComponent {
+    justify-content: center;
+  }
+}
