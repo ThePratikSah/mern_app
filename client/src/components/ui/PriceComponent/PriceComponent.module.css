@@ -9,6 +9,7 @@
     height: 40px;
     position: fixed;
     bottom: 0;
+    z-index: 10000;
 }
 
 .LocationPoint__fetchPriceSpan {

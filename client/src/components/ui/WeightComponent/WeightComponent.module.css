@@ -23,6 +23,11 @@
   background-color: #7a29e4;
 }
 
+.IsActive {
+  background-color: #7a29e4 !important;
+  color: #ffffff !important;
+}
+
 @media only screen and (min-width: 600px) {
   .WeightComponent {
     justify-content: center;

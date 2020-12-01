@@ -5,7 +5,8 @@ function WeightComponent() {
   const baseUrl = "https://delivery-nodejs.herokuapp.com/";
 
   const [weight, setWeight] = useState(null);
-
+  const [active, setActive] = useState("");
+ 
   useEffect(() => {
     async function fetchWeight() {
       try {
@@ -21,9 +22,13 @@ function WeightComponent() {
     fetchWeight();
   }, []);
 
+  let clicked = (id) => {
+    setActive(id);
+  }
+  
   return (
     <div className={classes.WeightComponent}>
-      {weight !== null ? weight.map(ele => <span>{ele.weight} kg</span>) : <span>loading weight...</span>}
+      {weight !== null ? weight.map(ele => <span onClick={() => clicked(ele._id)} className={active === ele._id ? classes.IsActive : "" } key={ele._id}>{ele.weight} kg</span>) : <span>loading weight...</span>}
     </div>
   )
 }
