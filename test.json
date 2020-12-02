@@ -1,0 +1,30 @@
+{
+    "_id":"string",
+    "sender": {
+        "name":"string",
+        "email":"string",
+        "phone":"number",
+        "coordinates":{
+            "lat":"double",
+            "lng":"double"
+        },
+        "address":"string",
+        "pickuptime":"datetime"
+    },
+    "receiver": {
+        "name":"string",
+        "email":"string",
+        "phone":"number",
+        "coordinates":{
+            "lat":"double",
+            "lng":"double"
+        },
+        "address":"string",
+        "droptime":"datetime"
+    },
+    "paymentId":"string",
+    "createdAt":"dateTime",
+    "updatedAt":"updatedAt",
+    "isPaymentSuccessful": "boolean",
+    "status": "COMPLETED/PENDING/FAILED"
+}
