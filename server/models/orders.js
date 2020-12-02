@@ -12,7 +12,7 @@ const coordinateSchema = new Schema({
     type: [Number],
     required: true
   }
-});
+},{ _id : false });
 
 const Address = new Schema({
   name : {
@@ -36,11 +36,11 @@ const Address = new Schema({
     default: Date.now
   },
   location: coordinateSchema
-});
+},{ _id : false });
 
 const orderSchema = new Schema({
-  sender:[Address],
-  receiver:[Address],
+  sender: Address,
+  receiver:Address,
   paymentId:{
     type:String,
     required:true,
