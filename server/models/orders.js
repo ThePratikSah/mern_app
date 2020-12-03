@@ -49,6 +49,11 @@ const orderSchema = new Schema({
     type: Boolean,
     default:false
   },
+  //TODO design driver schema
+  // driver:{
+  //   type:Schema.types.ObjectId,
+  //   ref:
+  // }
 },{
   timestamps: true
 });
