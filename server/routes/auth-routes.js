@@ -21,4 +21,10 @@ router.post('/administrator/login', [expressValidator.check('email').isEmail().n
         })],
     authController.administratorLogin);
 
+//ADMINISTRATOR GET-OTP
+router.post('/administrator/get-otp', authController.getOTPAdmin);
+
+//ADMINISTRATOR RESET PASSWORD
+router.post('/administrator/reset-password', authController.resetAdminPassword);
+
 export default router;
