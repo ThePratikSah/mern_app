@@ -22,9 +22,17 @@ router.post('/administrator/login', [expressValidator.check('email').isEmail().n
     authController.administratorLogin);
 
 //ADMINISTRATOR GET-OTP
-router.post('/administrator/get-otp', authController.getOTPAdmin);
+router.post('/administrator/get-otp',
+  [expressValidator.check('email').isEmail().normalizeEmail()],
+  authController.getOTPAdmin);
 
 //ADMINISTRATOR RESET PASSWORD
-router.post('/administrator/reset-password', authController.resetAdminPassword);
+router.post('/administrator/reset-password',
+  [expressValidator.check('email').isEmail().normalizeEmail(),
+    expressValidator.check('otp').not().isEmpty(),
+    expressValidator.check('password').trim().isLength({
+      min: 10
+    })],
+  authController.resetAdminPassword);
 
 export default router;

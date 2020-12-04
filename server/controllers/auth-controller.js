@@ -8,13 +8,7 @@ import Administrator from '../models/administrator.js';
 
 //administrator signup
 export const administratorSignup = async (req, res, next) => {
-    const errors = expressValidator.validationResult(req);
-    if (!errors.isEmpty()) {
-        const error = new Error('Validation Failed');
-        error.statusCode = 422;
-        error.data = errors.array();
-        return next(error);
-    }
+    validationErrorHandler(req, next);
     const name = req.body.name;
     const email = req.body.email;
     const password = req.body.password;
@@ -48,6 +42,7 @@ export const administratorSignup = async (req, res, next) => {
 
 //administrator login
 export const administratorLogin = async (req, res, next) => {
+    validationErrorHandler(req, next);
     const email = req.body.email;
     const password = req.body.password;
     let loadedAdmin;
@@ -84,6 +79,7 @@ export const administratorLogin = async (req, res, next) => {
 };
 //function to send otp to admin email
 export const getOTPAdmin = async (req, res, next) => {
+    validationErrorHandler(req, next);
     const email = req.body.email;
     let loadedAdmin;
     let generatedOTP;
@@ -115,9 +111,11 @@ export const getOTPAdmin = async (req, res, next) => {
 
 //function to reset admin password
 export const resetAdminPassword = async (req, res, next) => {
+    validationErrorHandler(req, next);
     const email = req.body.email;
     const oneTimePassword = req.body.otp;
     const password = req.body.password;
+    
     try {
         const admin = await Administrator.findOne({
             resetToken: oneTimePassword,
@@ -135,10 +133,9 @@ export const resetAdminPassword = async (req, res, next) => {
         admin.password = hashedPassword;
         admin.resetToken = undefined;
         admin.resetTokenExpiryDate = undefined;
-        const data =await admin.save();
+        await admin.save();
         res.status(201).json({
             message: 'Password Updated!',
-            result: data
         });
     } catch (err) {
         if (!err.statusCode) {
@@ -159,4 +156,14 @@ const generateOTP = () => {
     return OTP;
 };
 
+//helper function to pass error validation to central error handler
+const validationErrorHandler= (req, next) => {
+    const errors = expressValidator.validationResult(req);
+    if (!errors.isEmpty()) {
+        const error = new Error('Validation Failed');
+        error.statusCode = 422;
+        error.data = errors.array();
+        return next(error);
+    }
+};
 

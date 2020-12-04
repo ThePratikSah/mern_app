@@ -19,24 +19,44 @@ export const fetchPriceAndWeights = async (req, res, next) => {
 
 
 export const placeOrder = async (req, res, next) => {
-  const {sender, receiver, paymentId} = req.body;
-  if (!sender || !receiver || !paymentId){
-    res.status(406).json({
-      message: 'Missing fields',
-    });
+  const {sender, receiver, paymentId, isPaymentSuccessful, amount} = req.body;
+  if (!sender || !receiver || !paymentId || !isPaymentSuccessful || !amount) {
+    const error = new Error('Missing fields');
+    error.statusCode = 406;
+    return next(error);
   }
   const order = new Order({
     sender: sender,
     receiver: receiver,
-    paymentId:paymentId,
-});
-  try{
+    paymentId: paymentId,
+    isPaymentSuccessful: isPaymentSuccessful,
+    amount: amount
+  });
+  try {
     const result = await order.save();
     res.status(201).json({
       message: 'order created successfully',
       result: result
     });
-  }catch (err) {
+  } catch (err) {
+    if (!err.statusCode) {
+      err.statusCode = 500;
+    }
+    next(err);
+  }
+};
+
+export const trackOrder = async (req, res, next) => {
+  const orderId = req.body.orderId;
+  try {
+    const order = await Order.findById(orderId);
+    if (!order){
+      const error = new Error('No such order found');
+      error.statusCode = 404;
+      return next(error);
+    }
+    //TODO: implement socket.io
+  } catch (err) {
     if (!err.statusCode) {
       err.statusCode = 500;
     }
