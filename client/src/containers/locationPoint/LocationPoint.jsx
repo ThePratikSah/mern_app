@@ -39,6 +39,7 @@ function LocationPoint() {
     let latLngInitial = await getLatLng(resInitial[0]);
     setInitialAddress(valueInitial);
     setInitialCoordinates(latLngInitial);
+    console.log(latLngInitial);
   };
 
   const finalHandleSelect = async (valueFinal) => {
