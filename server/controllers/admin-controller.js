@@ -52,6 +52,33 @@ export const getAllOrders = async (req, res, next) => {
   }
 };
 
+//function to fetch orders =>sorting passed by admin
+export const getSortedOrders = async (req, res, next) => {
+  let {fromDate, toDate} = req.body;
+  let filter;
+  try {
+    if (!fromDate || !toDate){
+      const orders = await Orders.find().sort({createdAt: -1});
+        res.status(200).json({
+          message: 'All orders fetched',
+          orders: orders,
+        });
+        return;
+    }
+    filter = {createdAt: {$lte: fromDate, $gte: toDate}}
+    const orders = await Orders.find(filter).sort({createdAt: -1});
+    res.status(200).json({
+      message: 'Filtered orders fetched',
+      orders: orders,
+    });
+  } catch (err) {
+    if (!err.statusCode) {
+      err.statusCode = 500;
+    }
+    next(err);
+  }
+};
+
 //function to confirm payment of an order manually using an orderId
 export const confirmOrderPayment = async (req, res, next) => {
   const orderId = req.body.orderId;

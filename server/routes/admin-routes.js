@@ -9,6 +9,9 @@ import * as adminController from '../controllers/admin-controller.js';
 //get all orders
 router.get('/orders', isAdmin, adminController.getAllOrders);
 
+//get sorted orders and all orders
+router.post('/orders', isAdmin, adminController.getSortedOrders);
+
 //create price and weight
 router.post('/create-price', isAdmin, adminController.createPriceAndWeight);
 
