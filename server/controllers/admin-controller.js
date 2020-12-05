@@ -55,20 +55,25 @@ export const getAllOrders = async (req, res, next) => {
 //function to fetch orders =>sorting passed by admin
 export const getSortedOrders = async (req, res, next) => {
   let {fromDate, toDate} = req.body;
+  const skip = parseInt(req.body.skip);
+  const limit = parseInt(req.body.limit);
   let filter;
   try {
-    if (!fromDate || !toDate){
-      const orders = await Orders.find().sort({createdAt: -1});
-        res.status(200).json({
-          message: 'All orders fetched',
-          orders: orders,
-        });
-        return;
+    const totalOrders = await Orders.find().countDocuments();
+    if (!fromDate || !toDate) {
+      const orders = await Orders.find().sort({createdAt: -1}).skip(skip).limit(limit);
+      res.status(200).json({
+        message: 'All orders fetched',
+        orders: orders,
+        total: totalOrders,
+      });
+      return;
     }
-    filter = {createdAt: {$lte: fromDate, $gte: toDate}}
-    const orders = await Orders.find(filter).sort({createdAt: -1});
+    filter = {createdAt: {$lte: fromDate, $gte: toDate}};
+    const orders = await Orders.find(filter).sort({createdAt: -1}).skip(skip).limit(limit);
     res.status(200).json({
       message: 'Filtered orders fetched',
+      total: totalOrders,
       orders: orders,
     });
   } catch (err) {

@@ -49,6 +49,10 @@ const orderSchema = new Schema({
     type: Boolean,
     default:false
   },
+  isDriverAssigned:{
+    type: Boolean,
+    default:false
+  },
   amount:{
     type:Number,
     required:true
