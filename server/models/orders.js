@@ -1,7 +1,18 @@
 import mongoose from 'mongoose';
-import Coordinates from './coordinates.js';
 
 const Schema = mongoose.Schema;
+
+const Coordinates = new Schema({
+  type: {
+    type: String,
+    enum: ['Point'],
+    required: true
+  },
+  coordinates: {
+    type: [Number],
+    required: true
+  }
+},{ _id : false });
 
 const Address = new Schema({
   name : {
@@ -34,10 +45,6 @@ const orderSchema = new Schema({
     type:String,
     required:true,
   },
-  isPaymentSuccessful:{
-    type: Boolean,
-    default:false
-  },
   isDriverAssigned:{
     type: Boolean,
     default:false
@@ -47,7 +54,7 @@ const orderSchema = new Schema({
     required:true
   },
   driver:{
-    type:Schema.types.ObjectId,
+    type:Schema.Types.ObjectId,
     ref:'Driver',
   }
 },{

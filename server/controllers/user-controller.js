@@ -2,6 +2,7 @@ import PriceAndWeight from '../models/priceAndWeight.js';
 
 import Order from '../models/orders.js';
 
+//function to fetch all price and weights
 export const fetchPriceAndWeights = async (req, res, next) => {
   try {
     const priceAndWeights = await PriceAndWeight.find();
@@ -29,7 +30,6 @@ export const placeOrder = async (req, res, next) => {
     sender: sender,
     receiver: receiver,
     paymentId: paymentId,
-    isPaymentSuccessful: isPaymentSuccessful,
     amount: amount
   });
   try {

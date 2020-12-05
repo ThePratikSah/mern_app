@@ -18,6 +18,12 @@ router.post('/create-price', isAdmin, adminController.createPriceAndWeight);
 //update the payment status of an order manually
 router.put('/update-order', isAdmin, adminController.confirmOrderPayment);
 
+//create a new driver
+router.post('/new-driver', isAdmin, adminController.createDriver);
+
+//update anew driver
+router.put('/update-driver',isAdmin,adminController.editDriver);
+
 //assign driver to order
 router.post('/assign-driver', isAdmin, adminController.assignDriverToOrder);
 

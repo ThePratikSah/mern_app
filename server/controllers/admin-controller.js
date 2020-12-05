@@ -1,7 +1,5 @@
 import expressValidator from 'express-validator';
 
-import Administrator from '../models/administrator.js';
-
 import Driver from '../models/driver.js';
 
 import PriceAndWeight from '../models/priceAndWeight.js';
@@ -36,11 +34,63 @@ export const createPriceAndWeight = async (req, res, next) => {
   }
 };
 
+//function to add a new driver
+export const createDriver = async (req, res, next) => {
+  const {name, email, phone, adhaarNumber} = req.body;
+  try {
+    const driver = new Driver({
+      name: name,
+      email: email,
+      phone: phone,
+      adhaarNumber: adhaarNumber
+    });
+    const result = await driver.save();
+    res.status(201).json({
+      message: 'New Driver created!',
+      result: result
+    });
+  } catch (err) {
+    if (!err.statusCode) {
+      err.statusCode = 500;
+    }
+    next(err);
+  }
+};
+
+//function to edit a driver
+export const editDriver = async (req, res, next) => {
+  const {driverId, name, email, phone, alternatePhone, adhaarNumber, isApproved} = req.body;
+  try {
+    const driver = await Driver.findById(driverId);
+    if (!driver) {
+      const error = new Error('No driver found');
+      error.statusCode = 404;
+      return next(error);
+    }
+    driver.name = name;
+    driver.email = email;
+    driver.phone = phone;
+    driver.alternatePhone = alternatePhone;
+    driver.adhaarNumber = adhaarNumber;
+    driver.isApproved = isApproved;
+    const result = await driver.save();
+    res.status(201).json({
+      message: `Driver updated`,
+      result: result
+    });
+  } catch (err) {
+    if (!err.statusCode) {
+      err.statusCode = 500;
+    }
+    next(err);
+  }
+};
+
 //function to fetch all orders in descending order
 export const getAllOrders = async (req, res, next) => {
   try {
     const totalOrders = await Orders.find().countDocuments();
-    const orders = await Orders.find().sort({createdAt: -1});
+    const orders = await Orders.find({isPaymentSuccessful: {$eq: true}}).sort({createdAt: -1});
     res.status(200).json({
       message: 'All orders fetched',
       orders: orders,
@@ -85,6 +135,8 @@ export const getSortedOrders = async (req, res, next) => {
     next(err);
   }
 };
+
+//
 
 //function to confirm payment of an order manually using an orderId
 export const confirmOrderPayment = async (req, res, next) => {
@@ -150,6 +202,17 @@ export const assignDriverToOrder = async (req, res, next) => {
       err.statusCode = 500;
     }
     next(err);
+  }
+};
+
+//helper function to pass error validation to central error handler
+const validationErrorHandler = (req, next) => {
+  const errors = expressValidator.validationResult(req);
+  if (!errors.isEmpty()) {
+    const error = new Error('Validation Failed');
+    error.statusCode = 422;
+    error.data = errors.array();
+    return next(error);
   }
 };
 
