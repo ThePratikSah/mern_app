@@ -20,7 +20,7 @@ const Address = new Schema({
     type: String,
     required: true
   },
-  pickupTime:{
+  time:{
     type : Date,
     default: Date.now
   },
@@ -45,12 +45,11 @@ const orderSchema = new Schema({
   amount:{
     type:Number,
     required:true
+  },
+  driver:{
+    type:Schema.types.ObjectId,
+    ref:'Driver',
   }
-  //TODO design driver schema
-  // driver:{
-  //   type:Schema.types.ObjectId,
-  //   ref:
-  // }
 },{
   timestamps: true
 });
