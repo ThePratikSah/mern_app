@@ -1,18 +1,7 @@
 import mongoose from 'mongoose';
+import Coordinates from './coordinates.js';
 
 const Schema = mongoose.Schema;
-
-const coordinateSchema = new Schema({
-  type: {
-    type: String,
-    enum: ['Point'],
-    required: true
-  },
-  coordinates: {
-    type: [Number],
-    required: true
-  }
-},{ _id : false });
 
 const Address = new Schema({
   name : {
@@ -31,11 +20,11 @@ const Address = new Schema({
     type: String,
     required: true
   },
-  pickupTime:{
+  time:{
     type : Date,
     default: Date.now
   },
-  location: coordinateSchema
+  location: Coordinates
 },{ _id : false });
 
 const orderSchema = new Schema({
@@ -49,11 +38,18 @@ const orderSchema = new Schema({
     type: Boolean,
     default:false
   },
-  //TODO design driver schema
-  // driver:{
-  //   type:Schema.types.ObjectId,
-  //   ref:
-  // }
+  isDriverAssigned:{
+    type: Boolean,
+    default:false
+  },
+  amount:{
+    type:Number,
+    required:true
+  },
+  driver:{
+    type:Schema.types.ObjectId,
+    ref:'Driver',
+  }
 },{
   timestamps: true
 });

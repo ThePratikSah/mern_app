@@ -2,6 +2,8 @@ import expressValidator from 'express-validator';
 
 import Administrator from '../models/administrator.js';
 
+import Driver from '../models/driver.js';
+
 import PriceAndWeight from '../models/priceAndWeight.js';
 
 import Orders from '../models/orders.js';
@@ -52,6 +54,38 @@ export const getAllOrders = async (req, res, next) => {
   }
 };
 
+//function to fetch orders =>sorting passed by admin
+export const getSortedOrders = async (req, res, next) => {
+  let {fromDate, toDate} = req.body;
+  const skip = parseInt(req.body.skip);
+  const limit = parseInt(req.body.limit);
+  let filter;
+  try {
+    const totalOrders = await Orders.find().countDocuments();
+    if (!fromDate || !toDate) {
+      const orders = await Orders.find().sort({createdAt: -1}).skip(skip).limit(limit);
+      res.status(200).json({
+        message: 'All orders fetched',
+        orders: orders,
+        total: totalOrders,
+      });
+      return;
+    }
+    filter = {createdAt: {$lte: fromDate, $gte: toDate}};
+    const orders = await Orders.find(filter).sort({createdAt: -1}).skip(skip).limit(limit);
+    res.status(200).json({
+      message: 'Filtered orders fetched',
+      total: totalOrders,
+      orders: orders,
+    });
+  } catch (err) {
+    if (!err.statusCode) {
+      err.statusCode = 500;
+    }
+    next(err);
+  }
+};
+
 //function to confirm payment of an order manually using an orderId
 export const confirmOrderPayment = async (req, res, next) => {
   const orderId = req.body.orderId;
@@ -72,6 +106,44 @@ export const confirmOrderPayment = async (req, res, next) => {
     res.status(200).json({
       message: `${orderId}: Order payment confirmed`,
       result: result
+    });
+  } catch (err) {
+    if (!err.statusCode) {
+      err.statusCode = 500;
+    }
+    next(err);
+  }
+};
+
+// function to assign a driver to an order
+export const assignDriverToOrder = async (req, res, next) => {
+  const {orderId, driverId} = req.body;
+  try {
+    const order = await Orders.findById(orderId);
+    const driver = await Driver.findById(driverId);
+    if (!order || !driver) {
+      const error = new Error('No order found');
+      error.statusCode = 404;
+      return next(error);
+    }
+    if (order.isPaymentSuccessful === false) {
+      const error = new Error('Payment not confirmed yet');
+      error.statusCode = 402;
+      return next(error);
+    }
+    //manipulating order document
+    order.driverId = driver._id;
+    order.isDriverAssigned = true;
+    
+    //manipulating driver document
+    driver.isOccupied = true;
+    driver.currentOrder = order._id;
+    driver.orders.push(order._id);
+    
+    order.save();
+    driver.save();
+    res.status(201).json({
+      message: `${orderId}: Order  assigned to ${driverId}: Driver`,
     });
   } catch (err) {
     if (!err.statusCode) {

@@ -4,7 +4,6 @@ import https from 'https';
 
 //installed modules
 import express from 'express';
-import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
 import multer from 'multer';
 import helmet from 'helmet';
