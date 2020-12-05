@@ -20,8 +20,8 @@ export const fetchPriceAndWeights = async (req, res, next) => {
 
 
 export const placeOrder = async (req, res, next) => {
-  const {sender, receiver, paymentId, isPaymentSuccessful, amount} = req.body;
-  if (!sender || !receiver || !paymentId || !isPaymentSuccessful || !amount) {
+  const {sender, receiver, paymentId, amount} = req.body;
+  if (!sender || !receiver || !paymentId  || !amount) {
     const error = new Error('Missing fields');
     error.statusCode = 406;
     return next(error);

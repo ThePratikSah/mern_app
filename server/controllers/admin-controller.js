@@ -90,7 +90,7 @@ export const editDriver = async (req, res, next) => {
 export const getAllOrders = async (req, res, next) => {
   try {
     const totalOrders = await Orders.find().countDocuments();
-    const orders = await Orders.find({isPaymentSuccessful: {$eq: true}}).sort({createdAt: -1});
+    const orders = await Orders.find().sort({createdAt: -1});
     res.status(200).json({
       message: 'All orders fetched',
       orders: orders,
