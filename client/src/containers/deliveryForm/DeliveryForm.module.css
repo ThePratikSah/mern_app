@@ -65,7 +65,7 @@
   color: #7a29e4;
 }
 
-@media only screen and (min-width: 600px) {
+@media only screen and (min-width: 800px) {
   .DeliveryForm {
     display: flex;
     flex-direction: column;
