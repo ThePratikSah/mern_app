@@ -12,52 +12,60 @@ const Coordinates = new Schema({
     type: [Number],
     required: true
   }
-},{ _id : false });
+}, {_id: false});
 
 const Address = new Schema({
-  name : {
-    type:String,
-    required :true
-  },
-  email:{
+  name: {
     type: String,
     required: true
   },
-  phone:{
-    type:Number,
-    required: true
-  },
-  address:{
+  email: {
     type: String,
     required: true
   },
-  time:{
-    type : Date,
+  phone: {
+    type: Number,
+    required: true
+  },
+  address: {
+    type: String,
+    required: true
+  },
+  time: {
+    type: Date,
     default: Date.now
   },
   location: Coordinates
-},{ _id : false });
+}, {_id: false});
 
 const orderSchema = new Schema({
   sender: Address,
-  receiver:Address,
-  paymentId:{
-    type:String,
-    required:true,
+  receiver: Address,
+  paymentId: {
+    type: String,
+    required: true,
   },
-  isDriverAssigned:{
+  isDriverAssigned: {
     type: Boolean,
-    default:false
+    default: false
   },
-  amount:{
-    type:Number,
-    required:true
+  amount: {
+    type: Number,
+    required: true
   },
-  driver:{
-    type:Schema.Types.ObjectId,
-    ref:'Driver',
+  weight: {
+    type: Number,
+    required: true
+  },
+  distance: {
+    type: Number,
+    required: true
+  },
+  driver: {
+    type: Schema.Types.ObjectId,
+    ref: 'Driver',
   }
-},{
+}, {
   timestamps: true
 });
 
