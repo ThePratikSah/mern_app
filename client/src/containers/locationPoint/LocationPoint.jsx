@@ -1,28 +1,26 @@
-import React, {useState, useEffect} from "react";
+import React, {useState, useContext} from "react";
 import classes from "./LocationPoint.module.css";
 import deliverImg from "../../img/deliver.svg";
+import DeliveryForm from "../deliveryForm/DeliveryForm";
 import Button from "../../components/ui/button/Button";
+import UserContext from "../../context/UserContext";
 
-import PlacesAutoComplete, {
+import {
   geocodeByAddress,
   getLatLng,
 } from "react-places-autocomplete";
 import InputPlacesComponent from "./InputPlacesComponent/InputPlacesComponent";
-import PriceComponent from "../../components/ui/PriceComponent/PriceComponent.";
 
 function LocationPoint() {
+  
+  //importing global state
+  const {user, setUser} = useContext(UserContext);
+  
   //states
   const [initialAddress, setInitialAddress] = useState("");
   const [finalAddress, setFinalAddress] = useState("");
   const [distance, setDistance] = useState({text: "", value: 0});
-
-  // useEffect(() => {
-  //   document.querySelector("#distance").innerHTML = `Book Now @ ${
-  //     distance["value"] <= 5000
-  //       ? 40
-  //       : 40 + ((distance["value"] - 5000) / 1000) * 10
-  //   }₹`;
-  // });
+  const [navigate, setNavigate] = useState(false);
 
   const [initialCoordinates, setInitialCoordinates] = useState({
     lat: null,
@@ -46,7 +44,6 @@ function LocationPoint() {
     let latLngFinal = await getLatLng(resFinal[0]);
     setFinalAddress(valueFinal);
     setFinalCoordinates(latLngFinal);
-    console.log(latLngFinal);
   };
   const fetchLocation = async () => {
     try {
@@ -71,8 +68,18 @@ function LocationPoint() {
           }),
         });
         const json = await res.json();
-        console.log(json["rows"][0]["elements"][0]["distance"]);
         setDistance(json["rows"][0]["elements"][0]["distance"]);
+        
+        //setting required data in the global state
+        setUser({
+          ...user,
+          senderAddress: initialAddress,
+          receiverAddress: finalAddress,
+          distance: json["rows"][0]["elements"][0]["distance"]["value"],
+          senderCoordinates: [initialCoordinates.lat, initialCoordinates.lng],
+          receiverCoordinates: [finalCoordinates.lat, finalCoordinates.lng]
+        });
+        setNavigate(true);
       } else {
         alert('Empty Field');
       }
@@ -80,15 +87,16 @@ function LocationPoint() {
       console.log(e.message);
     }
   };
-
+  
   return (
-    <div className={classes.LocationPoint}>
+    navigate ? <DeliveryForm />
+    : <div className={classes.LocationPoint}>
       <div className={classes.LocationPoint__imageDiv}>
         <img className={classes.LocationPoint__image} src={deliverImg} alt=""/>
       </div>
       <div className={classes.LocationPoint__formArea}>
         <div className={classes.LocationPoint__mainForm}>
-
+          
           {/* initial point location pickup */}
           <InputPlacesComponent
             value={initialAddress}
@@ -97,7 +105,7 @@ function LocationPoint() {
             labelText={"Pickup Point"}
             inputId={"originId"}
           />
-
+          
           {/* final point location drop */}
           <InputPlacesComponent
             value={finalAddress}
@@ -106,7 +114,6 @@ function LocationPoint() {
             labelText={"Dropping Point"}
             inputId={"destinationId"}
           />
-
           <div className={classes.LocationPoint__submitBtnGroup}>
             <Button onClick={fetchLocation} id={"distance"} text={`Book Now`}/>
           </div>
