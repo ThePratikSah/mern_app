@@ -47,8 +47,8 @@ export const placeOrder = async (req, res, next) => {
 };
 
 export const trackOrder = async (req, res, next) => {
-  const orderId = req.body.orderId;
   try {
+  const orderId = req.body.orderId;
     const order = await Order.findById(orderId);
     if (!order){
       const error = new Error('No such order found');

@@ -8,6 +8,7 @@ import Administrator from '../models/administrator.js';
 
 //administrator signup
 export const administratorSignup = async (req, res, next) => {
+  try {
   validationErrorHandler(req, next);
   const name = req.body.name;
   const email = req.body.email;
@@ -18,7 +19,6 @@ export const administratorSignup = async (req, res, next) => {
     error.statusCode = 422;
     return next(error);
   }
-  try {
     const hashedPwd = await bcrypt.hash(password, 12);
     const admin = new Administrator({
       email: email,
@@ -41,11 +41,11 @@ export const administratorSignup = async (req, res, next) => {
 
 //administrator login
 export const administratorLogin = async (req, res, next) => {
+  try {
   validationErrorHandler(req, next);
   const email = req.body.email;
   const password = req.body.password;
   let loadedAdmin;
-  try {
     const admin = await Administrator.findOne({email: email});
     if (!admin) {
       const error = new Error('Admin with this email doesn\'t exist');
@@ -78,11 +78,11 @@ export const administratorLogin = async (req, res, next) => {
 };
 //function to send otp to admin email
 export const getOTPAdmin = async (req, res, next) => {
+  try {
   validationErrorHandler(req, next);
   const email = req.body.email;
   let loadedAdmin;
   let generatedOTP;
-  try {
     const admin = await Administrator.findOne({email: email});
     if (!admin) {
       const error = new Error('Admin with this email doesn\'t exist');
@@ -110,12 +110,12 @@ export const getOTPAdmin = async (req, res, next) => {
 
 //function to reset admin password
 export const resetAdminPassword = async (req, res, next) => {
+  try {
   validationErrorHandler(req, next);
   const email = req.body.email;
   const oneTimePassword = req.body.otp;
   const password = req.body.password;
   
-  try {
     const admin = await Administrator.findOne({
       resetToken: oneTimePassword,
       resetTokenExpiryDate: {
@@ -159,10 +159,10 @@ const generateOTP = () => {
 const validationErrorHandler = (req, next) => {
   const errors = expressValidator.validationResult(req);
   if (!errors.isEmpty()) {
-    const error = new Error('Validation Failed');
-    error.statusCode = 422;
-    error.data = errors.array();
-    return next(error);
+    const err = new Error('Validation Failed');
+    err.statusCode = 422;
+    err.data = errors.array();
+    throw err;
   }
 };
 
