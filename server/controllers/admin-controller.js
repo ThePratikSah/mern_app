@@ -33,6 +33,13 @@ export const createDriver = async (req, res, next) => {
   try {
     validationErrorHandler(req, next);
     const {name, email, phone, adhaarNumber} = req.body;
+    const existingDriver = await Driver.findOne({email:email});
+    if (existingDriver){
+      console.log(existingDriver);
+      const error = new Error('This driver already exists in Database');
+      error.statusCode = 422;
+      return next(error);
+    }
     const driver = new Driver({
       name: name,
       email: email,
