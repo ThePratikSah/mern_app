@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import classes from "./BuyForMe.module.css";
 import Button from "../../components/ui/button/Button";
 import InputComponent from "../../components/ui/InputComponent/InputComponent.";
@@ -10,7 +10,6 @@ function BuyForMe() {
   //states
   const [shopAddress, setShopAddress] = useState("");
   const [finalAddress, setFinalAddress] = useState("");
-  const [distance, setDistance] = useState({text: "", value: 0});
 
   // useEffect(() => {
   //   document.querySelector("#distance").innerHTML = `Book Now @ ${
@@ -68,7 +67,6 @@ function BuyForMe() {
         });
         const json = await res.json();
         console.log(json["rows"][0]["elements"][0]["distance"]);
-        setDistance(json["rows"][0]["elements"][0]["distance"]);
       } else {
         alert('Empty Field');
       }
