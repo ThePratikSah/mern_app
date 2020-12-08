@@ -1,16 +1,14 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 
 import classes from "./DeliveryForm.module.css";
 import InputComponent from "../../components/ui/InputComponent/InputComponent.";
 import Button from "../../components/ui/button/Button";
 import WeightComponent from "../../components/ui/WeightComponent/WeightComponent.";
-import DateTimeComponent from "../../components/ui/DateTimeComponent/DateTimeComponent.";
 import PriceComponent from "../../components/ui/PriceComponent/PriceComponent.";
 
 import UserContext from "../../context/UserContext";
 
 function DeliveryForm() {
-  const [value, setValue] = useState("");
   const { user } = useContext(UserContext);
 
   return (
@@ -65,11 +63,21 @@ function DeliveryForm() {
             type={"text"}
             placeholder={"Street name/Locality name and Landmark"}
           />
-          <DateTimeComponent
+
+          {/* Pickup Date */}
+          <InputComponent
+            value={user.pickupDate}
+            name={"sdate"}
+            labelText={"Date"}
+            type={"date"}
+          />
+
+          {/* Pickup Time */}
+          <InputComponent
+            value={user.pickupTime}
             name={"stime"}
-            value={value}
-            onChange={setValue}
-            label={"Pick up date and time"}
+            labelText={"Time"}
+            type={"time"}
           />
         </div>
         <div className={classes.form}>
@@ -113,11 +121,21 @@ function DeliveryForm() {
             type={"text"}
             placeholder={"Street name/Locality name and Landmark"}
           />
-          <DateTimeComponent
+
+          {/* Drop Date */}
+          <InputComponent
+            value={user.dropDate}
+            name={"pdate"}
+            labelText={"Date"}
+            type={"date"}
+          />
+
+          {/* Drop Time */}
+          <InputComponent
+            value={user.dropTime}
             name={"ptime"}
-            value={value}
-            onChange={setValue}
-            label={"Drop date and time"}
+            labelText={"Time"}
+            type={"time"}
           />
         </div>
       </div>

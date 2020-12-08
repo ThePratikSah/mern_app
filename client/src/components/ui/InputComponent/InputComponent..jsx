@@ -20,7 +20,7 @@ function InputComponent({ name, labelText, type, value, placeholder }) {
       case "sphone":
         setUser({
           ...user,
-          senderPhone: value,
+          senderPhone: Number.parseInt(value),
         });
         break;
       case "semail":
@@ -35,7 +35,66 @@ function InputComponent({ name, labelText, type, value, placeholder }) {
           pickupLocation: value,
         });
         break;
-
+      case "sstreet":
+        setUser({
+          ...user,
+          pickupStreet: value,
+        });
+        break;
+      case "sdate":
+        setUser({
+          ...user,
+          pickupDate: value,
+        });
+        break;
+      case "stime":
+        setUser({
+          ...user,
+          pickupTime: value,
+        });
+        break;
+      case "pname":
+        setUser({
+          ...user,
+          receiverName: value,
+        });
+        break;
+      case "pphone":
+        setUser({
+          ...user,
+          receiverPhone: Number.parseInt(value),
+        });
+        break;
+      case "pemail":
+        setUser({
+          ...user,
+          receiverEmail: value,
+        });
+        break;
+      case "plocation":
+        setUser({
+          ...user,
+          dropLocation: value,
+        });
+        break;
+      case "pstreet":
+        setUser({
+          ...user,
+          dropStreet: value,
+        });
+        break;
+      case "pdate":
+        setUser({
+          ...user,
+          dropDate: value,
+        });
+        break;
+      case "ptime":
+        setUser({
+          ...user,
+          dropTime: value,
+        });
+        break;
       default:
         break;
     }
