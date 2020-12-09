@@ -11,6 +11,20 @@ import UserContext from "../../context/UserContext";
 function DeliveryForm() {
   const { user } = useContext(UserContext);
 
+  // handle your form here
+  const formSubmitHandler = () => {
+    // join date and time into one
+    const pickupDate = new Date(
+      `${user.pickupDate} ${user.pickupTime}`
+    ).toISOString();
+    const dropDate = new Date(
+      `${user.dropDate} ${user.dropTime}`
+    ).toISOString();
+
+    // formulate the data object which has to be passed in the axios
+    const data = {};
+  };
+
   return (
     <div className={classes.DeliveryForm}>
       <h1 className={classes.DeliveryForm__header}>Make Delivery Request</h1>
@@ -141,9 +155,9 @@ function DeliveryForm() {
       </div>
 
       <div className={classes.DeliveryForm__submit}>
-        <Button id={"btn"} text={"Review Order"} />
+        <Button id={"btn"} onClick={formSubmitHandler} text={"Review Order"} />
       </div>
-      <PriceComponent value={"₹40"} />
+      <PriceComponent value={user.amount ? user.amount : "40"} />
     </div>
   );
 }
