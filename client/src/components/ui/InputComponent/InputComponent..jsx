@@ -20,7 +20,7 @@ function InputComponent({ name, labelText, type, value, placeholder }) {
       case "sphone":
         setUser({
           ...user,
-          senderPhone: Number.parseInt(value),
+          senderPhone: value,
         });
         break;
       case "semail":
@@ -62,7 +62,7 @@ function InputComponent({ name, labelText, type, value, placeholder }) {
       case "pphone":
         setUser({
           ...user,
-          receiverPhone: Number.parseInt(value),
+          receiverPhone: value,
         });
         break;
       case "pemail":

@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-
+import axios from "axios";
 import classes from "./DeliveryForm.module.css";
 import InputComponent from "../../components/ui/InputComponent/InputComponent.";
 import Button from "../../components/ui/button/Button";
@@ -12,7 +12,7 @@ function DeliveryForm() {
   const { user } = useContext(UserContext);
 
   // handle your form here
-  const formSubmitHandler = () => {
+  const formSubmitHandler = async () => {
     // join date and time into one
     const pickupDate = new Date(
       `${user.pickupDate} ${user.pickupTime}`
@@ -22,7 +22,48 @@ function DeliveryForm() {
     ).toISOString();
 
     // formulate the data object which has to be passed in the axios
-    const data = {};
+    const data = {
+      sender: {
+        name: user.senderName,
+        email: user.senderEmail,
+        phone: user.senderPhone,
+        address: `${user.pickupLocation}, ${user.pickupStreet}, ${user.senderAddress}`,
+        time: pickupDate,
+        location: {
+          type: "Point",
+          coordinates: user.senderCoordinates,
+        },
+      },
+      receiver: {
+        name: user.receiverName,
+        email: user.receiverEmail,
+        phone: user.receiverPhone,
+        address: `${user.dropLocation}, ${user.dropStreet}, ${user.receiverAddress}`,
+        time: dropDate,
+        location: {
+          type: "Point",
+          coordinates: user.receiverCoordinates,
+        },
+      },
+      paymentId: "paymentId12345",
+      amount: user.amount ? user.amount : 50,
+      weight: user.weight,
+      distance: user.distance,
+    };
+
+    // now we have the data
+    // we can make axios req
+    const url = `https://delivery-nodejs.herokuapp.com/user/create/order`;
+
+    const result = await axios.post(url, data, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    alert(result.statusText);
+
+    console.log(result);
   };
 
   return (
