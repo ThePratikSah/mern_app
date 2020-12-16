@@ -69,13 +69,14 @@ function LocationPoint() {
           }),
         });
         const json = await res.json();
-        
+        let distance = json["rows"][0]["elements"][0]["distance"]["value"];
+
         //setting required data in the global state
         setUser({
           ...user,
           senderAddress: initialAddress,
           receiverAddress: finalAddress,
-          distance: json["rows"][0]["elements"][0]["distance"]["value"],
+          distance: distance,
           senderCoordinates: [initialCoordinates.lat, initialCoordinates.lng],
           receiverCoordinates: [finalCoordinates.lat, finalCoordinates.lng]
         });

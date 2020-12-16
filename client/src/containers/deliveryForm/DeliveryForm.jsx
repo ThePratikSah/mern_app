@@ -1,18 +1,29 @@
-import React, { useState, useContext } from "react";
+import React, {useState, useEffect, useContext} from "react";
 import axios from "axios";
 import classes from "./DeliveryForm.module.css";
-import InputComponent from "../../components/ui/InputComponent/InputComponent.";
+import InputComponent
+  from "../../components/ui/InputComponent/InputComponent.";
 import Button from "../../components/ui/button/Button";
-import WeightComponent from "../../components/ui/WeightComponent/WeightComponent.";
-import PriceComponent from "../../components/ui/PriceComponent/PriceComponent.";
+import WeightComponent
+  from "../../components/ui/WeightComponent/WeightComponent.";
+import PriceComponent
+  from "../../components/ui/PriceComponent/PriceComponent.";
 import Spinner from "../../components/ui/Spinner/Spinner";
 
 import UserContext from "../../context/UserContext";
 
 function DeliveryForm() {
-  const { user, setUser } = useContext(UserContext);
+  const {user, setUser} = useContext(UserContext);
   const [loading, isLoading] = useState(false);
-
+  
+  useEffect(() => {
+    const amount = user.distance > 4000 ? Math.floor(((user.distance - 4000) / 1000)) * 20 : 0;
+    setUser({
+      ...user,
+      distancePrice: amount
+    });
+  }, []);
+  
   // handle your form here
   const formSubmitHandler = async () => {
     isLoading(true);
@@ -23,7 +34,7 @@ function DeliveryForm() {
     const dropDate = new Date(
       `${user.dropDate} ${user.dropTime}`
     ).toISOString();
-
+    
     // formulate the data object which has to be passed in the axios
     const data = {
       sender: {
@@ -53,36 +64,37 @@ function DeliveryForm() {
       weight: user.weight,
       distance: user.distance,
     };
-
+    
     // now we have the data
     // we can make axios req
     const url = `https://delivery-nodejs.herokuapp.com/user/create/order`;
-
+    
     const result = await axios.post(url, data, {
       headers: {
         "Content-Type": "application/json",
       },
     });
-
+    
     if (result.status === 201) {
       isLoading(false);
       alert("Order placed sucessfully");
       setUser(null);
     }
-
+    
     alert(result);
   };
-
+  
   return (
     <div className={classes.DeliveryForm}>
-      <h1 className={classes.DeliveryForm__header}>Make Delivery Request</h1>
+      <h1 className={classes.DeliveryForm__header}>Make Delivery
+        Request</h1>
       <span className={classes.DeliveryForm__headerSpan}>
         Our delivery agent will go through the below location and pickup the
         product
       </span>
-
+      
       {/* fetching weight list from backend */}
-      <WeightComponent />
+      <WeightComponent/>
       <div className={classes.form__group}>
         <div className={classes.form}>
           {/* name of sender */}
@@ -125,7 +137,7 @@ function DeliveryForm() {
             type={"text"}
             placeholder={"Street name/Locality name and Landmark"}
           />
-
+          
           {/* Pickup Date */}
           <InputComponent
             value={user.pickupDate}
@@ -133,7 +145,7 @@ function DeliveryForm() {
             labelText={"Date"}
             type={"date"}
           />
-
+          
           {/* Pickup Time */}
           <InputComponent
             value={user.pickupTime}
@@ -183,7 +195,7 @@ function DeliveryForm() {
             type={"text"}
             placeholder={"Street name/Locality name and Landmark"}
           />
-
+          
           {/* Drop Date */}
           <InputComponent
             value={user.dropDate}
@@ -191,7 +203,7 @@ function DeliveryForm() {
             labelText={"Date"}
             type={"date"}
           />
-
+          
           {/* Drop Time */}
           <InputComponent
             value={user.dropTime}
@@ -201,11 +213,14 @@ function DeliveryForm() {
           />
         </div>
       </div>
-
+      
       <div className={classes.DeliveryForm__submit}>
-        {loading ? <Spinner /> : <Button id={"btn"} onClick={formSubmitHandler} text={"Review Order"} />}
+        {loading ? <Spinner/> :
+          <Button id={"btn"} onClick={formSubmitHandler}
+                  text={"Review Order"}/>}
       </div>
-      <PriceComponent value={user.amount} />
+      <PriceComponent
+        value={user.amount + user.weightPrice + user.distancePrice + user.timePrice}/>
     </div>
   );
 }

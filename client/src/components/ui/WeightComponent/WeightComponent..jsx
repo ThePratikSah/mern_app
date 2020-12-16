@@ -18,7 +18,6 @@ function WeightComponent() {
         const res = await fetch(baseUrl + "user/fetch/price-weights");
         const jsonData = await res.json();
         setWeight(jsonData["result"]);
-        console.log(jsonData["result"]);
       } catch (e) {
         alert("Failed to fetch weight.");
       }
@@ -26,12 +25,12 @@ function WeightComponent() {
     fetchWeight();
   }, []);
 
-  let clicked = (id, weight) => {
+  let clicked = (id, weight, price) => {
     setActive(id);
-    
     setUser({
       ...user,
       weight: weight,
+      weightPrice: price,
     });
   };
 
@@ -40,7 +39,7 @@ function WeightComponent() {
       {weight !== null ? (
         weight.map((ele) => (
           <span
-            onClick={() => clicked(ele._id, ele.weight)}
+            onClick={() => clicked(ele._id, ele.weight, ele.price)}
             className={active === ele._id ? classes.IsActive : ""}
             key={ele._id}
           >
