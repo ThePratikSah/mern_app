@@ -3,8 +3,8 @@ import classes from "./LocationPoint.module.css";
 import deliverImg from "../../img/deliver.svg";
 import DeliveryForm from "../deliveryForm/DeliveryForm";
 import Button from "../../components/ui/button/Button";
+import Spinner from "../../components/ui/Spinner/Spinner";
 import UserContext from "../../context/UserContext";
-
 import {
   geocodeByAddress,
   getLatLng,
@@ -19,8 +19,8 @@ function LocationPoint() {
   //states
   const [initialAddress, setInitialAddress] = useState("");
   const [finalAddress, setFinalAddress] = useState("");
-  const [distance, setDistance] = useState({text: "", value: 0});
   const [navigate, setNavigate] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const [initialCoordinates, setInitialCoordinates] = useState({
     lat: null,
@@ -46,6 +46,7 @@ function LocationPoint() {
     setFinalCoordinates(latLngFinal);
   };
   const fetchLocation = async () => {
+    setIsLoading(true);
     try {
       const inputFieldOrigin = document.querySelector('#originId').value;
       const inputFieldDestination = document.querySelector('#destinationId').value;
@@ -68,7 +69,6 @@ function LocationPoint() {
           }),
         });
         const json = await res.json();
-        setDistance(json["rows"][0]["elements"][0]["distance"]);
         
         //setting required data in the global state
         setUser({
@@ -115,7 +115,7 @@ function LocationPoint() {
             inputId={"destinationId"}
           />
           <div className={classes.LocationPoint__submitBtnGroup}>
-            <Button onClick={fetchLocation} id={"distance"} text={`Book Now`}/>
+            {isLoading ? <Spinner /> : <Button onClick={fetchLocation} id={"distance"} text={`Book Now`}/>}
           </div>
         </div>
       </div>

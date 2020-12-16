@@ -6,6 +6,7 @@ import DeliveryForm from "./containers/deliveryForm/DeliveryForm";
 import BuyForMe from "./containers/buyForMe/BuyForMe";
 import NavBar from "./components/ui/navbar/NavBar";
 import Features from "./components/ui/features/Features";
+import OrderCard from "./containers/OrderCard/OrderCard";
 
 function App() {
   const [user, setUser] = useState({
@@ -30,7 +31,7 @@ function App() {
     distance: undefined,
     weight: undefined,
     paymentId: "",
-    amount: undefined,
+    amount: 40,
   });
 
   //TODO: Add Distance, Weight field in Order model
@@ -49,7 +50,7 @@ function App() {
             <Route exact path="/" component={LocationPoint} />
             {/* product delivery */}
             <Route path="/buy" component={BuyForMe} />
-            <Route path="/track" component={DeliveryForm} />
+            <Route path="/track" component={OrderCard} />
           </Switch>
         </div>
         {/* features section */}
