@@ -51,6 +51,7 @@ function InputComponent({ name, labelText, type, value, placeholder }) {
         setUser({
           ...user,
           pickupTime: value,
+          stimePrice: (Number.parseInt(value.split(':')[0]) > 19 || Number.parseInt(value.split(':')[0]) < 5) ? 30 : 0,
         });
         break;
       case "pname":
@@ -93,6 +94,7 @@ function InputComponent({ name, labelText, type, value, placeholder }) {
         setUser({
           ...user,
           dropTime: value,
+          ptimePrice: (Number.parseInt(value.split(':')[0]) > 19 || Number.parseInt(value.split(':')[0]) < 5) ? 30 : 0,
         });
         break;
       default:

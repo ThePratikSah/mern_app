@@ -220,7 +220,7 @@ function DeliveryForm() {
                   text={"Review Order"}/>}
       </div>
       <PriceComponent
-        value={user.amount + user.weightPrice + user.distancePrice + user.timePrice}/>
+        value={user.amount + user.weightPrice + user.distancePrice + user.stimePrice + user.ptimePrice}/>
     </div>
   );
 }

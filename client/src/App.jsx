@@ -33,7 +33,8 @@ function App() {
     paymentId: "",
     weightPrice: 0,
     distancePrice: 0,
-    timePrice: 0,
+    stimePrice: 0,
+    ptimePrice: 0,
     amount: 39,
   });
 
