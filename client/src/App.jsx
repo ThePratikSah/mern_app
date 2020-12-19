@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import UserContext from "./context/UserContext";
 import LocationPoint from "./containers/locationPoint/LocationPoint";
-import DeliveryForm from "./containers/deliveryForm/DeliveryForm";
+import Success from "./components/Success/Success";
 import BuyForMe from "./containers/buyForMe/BuyForMe";
 import NavBar from "./components/ui/navbar/NavBar";
 import Features from "./components/ui/features/Features";
@@ -36,6 +36,7 @@ function App() {
     stimePrice: 0,
     ptimePrice: 0,
     amount: 39,
+    success: false,
   });
 
   //TODO: Add Distance, Weight field in Order model
@@ -54,6 +55,8 @@ function App() {
             <Route exact path="/" component={LocationPoint} />
             {/* product delivery */}
             <Route path="/buy" component={BuyForMe} />
+            {/* success page */}
+            <Route path="/success" component={Success} />
             <Route path="/track" component={OrderCard} />
           </Switch>
         </div>

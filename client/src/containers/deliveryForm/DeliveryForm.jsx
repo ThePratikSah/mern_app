@@ -1,4 +1,5 @@
 import React, {useState, useEffect, useContext} from "react";
+import {Redirect} from "react-router-dom";
 import axios from "axios";
 import classes from "./DeliveryForm.module.css";
 import InputComponent
@@ -77,11 +78,11 @@ function DeliveryForm() {
     
     if (result.status === 201) {
       isLoading(false);
-      alert("Order placed sucessfully");
-      setUser(null);
+      setUser({
+        ...user,
+        success: true,
+      });
     }
-    
-    alert(result);
   };
   
   return (
@@ -218,6 +219,7 @@ function DeliveryForm() {
         {loading ? <Spinner/> :
           <Button id={"btn"} onClick={formSubmitHandler}
                   text={"Review Order"}/>}
+        {user.success ? <Redirect to="/success" /> : null}
       </div>
       <PriceComponent
         value={user.amount + user.weightPrice + user.distancePrice + user.stimePrice + user.ptimePrice}/>
