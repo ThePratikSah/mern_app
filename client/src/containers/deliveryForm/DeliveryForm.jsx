@@ -10,7 +10,6 @@ import WeightComponent
 import PriceComponent
   from "../../components/ui/PriceComponent/PriceComponent.";
 import Spinner from "../../components/ui/Spinner/Spinner";
-
 import UserContext from "../../context/UserContext";
 
 function DeliveryForm() {
@@ -219,7 +218,7 @@ function DeliveryForm() {
         {loading ? <Spinner/> :
           <Button id={"btn"} onClick={formSubmitHandler}
                   text={"Review Order"}/>}
-        {user.success ? <Redirect to="/success" /> : null}
+        {user.success ? <Redirect to="/success"/> : null}
       </div>
       <PriceComponent
         value={user.amount + user.weightPrice + user.distancePrice + user.stimePrice + user.ptimePrice}/>

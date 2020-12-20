@@ -1,5 +1,10 @@
-import React, { useState } from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import React, {useState} from "react";
+import {
+  BrowserRouter as Router,
+  Redirect,
+  Route,
+  Switch
+} from "react-router-dom";
 import UserContext from "./context/UserContext";
 import LocationPoint from "./containers/locationPoint/LocationPoint";
 import Success from "./components/Success/Success";
@@ -38,30 +43,35 @@ function App() {
     amount: 39,
     success: false,
   });
-
+  
   //TODO: Add Distance, Weight field in Order model
-
+  
   return (
     <Router>
-      <UserContext.Provider value={{ user, setUser }}>
+      <UserContext.Provider value={{user, setUser}}>
         {/* NavBar */}
-        <NavBar />
+        <NavBar/>
         {/* use Link component inside your navbar component */}
         {/* serving the home page */}
         {/* navbar */}
         <div>
           <Switch>
             {/* DeliveryForm */}
-            <Route exact path="/" component={LocationPoint} />
+            <Route exact path="/" component={LocationPoint}/>
             {/* product delivery */}
-            <Route path="/buy" component={BuyForMe} />
+            <Route path="/buy" component={BuyForMe}/>
             {/* success page */}
-            <Route path="/success" component={Success} />
-            <Route path="/track" component={OrderCard} />
+            {/*{*/}
+            {/*  user.success ?*/}
+            {/*  <Route path="/success" component={Success}/> :*/}
+            {/*  <Redirect to="/"/>*/}
+            {/*}*/}
+            <Route path="/success" component={Success}/>
+            <Route path="/track" component={OrderCard}/>
           </Switch>
         </div>
         {/* features section */}
-        <Features />
+        <Features/>
         {/* footer */}
       </UserContext.Provider>
     </Router>
