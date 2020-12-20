@@ -61,12 +61,12 @@ function App() {
             {/* product delivery */}
             <Route path="/buy" component={BuyForMe}/>
             {/* success page */}
-            {/*{*/}
-            {/*  user.success ?*/}
-            {/*  <Route path="/success" component={Success}/> :*/}
-            {/*  <Redirect to="/"/>*/}
-            {/*}*/}
-            <Route path="/success" component={Success}/>
+            {
+              user.success ?
+              <Route path="/success" component={Success}/> :
+              <Redirect to="/"/>
+            }
+            {/*<Route path="/success" component={Success}/>*/}
             <Route path="/track" component={OrderCard}/>
           </Switch>
         </div>

@@ -1,6 +1,39 @@
-.card {}
+.cardParent {
+  width: 100%;
+  height: 50vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card {
+  border: 1px solid #7a29e4;
+  box-shadow: 0 2px 5px #d0abff;
+  border-radius: 10px;
+  font-size: 18px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  padding: 30px;
+  width: 60%;
+  margin: 0 auto;
+  text-align: center;
+}
 
 .icon {
   width: 40px;
   height: 40px;
+}
+
+p, h2, span {
+  margin: 5px 0;
+}
+
+button {
+  width: 180px;
+  height: 40px;
+  margin: 10px;
+  background-color: #7a29e4;
+  color: #f1f1f1;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
 }
