@@ -2,6 +2,7 @@ import PriceAndWeight from '../models/priceAndWeight.js';
 
 import Order from '../models/orders.js';
 
+//function to fetch all price and weights
 export const fetchPriceAndWeights = async (req, res, next) => {
   try {
     const priceAndWeights = await PriceAndWeight.find();
@@ -19,8 +20,8 @@ export const fetchPriceAndWeights = async (req, res, next) => {
 
 
 export const placeOrder = async (req, res, next) => {
-  const {sender, receiver, paymentId, isPaymentSuccessful, amount} = req.body;
-  if (!sender || !receiver || !paymentId || !isPaymentSuccessful || !amount) {
+  const {sender, receiver, paymentId, amount, weight, distance} = req.body;
+  if (!sender || !receiver || !paymentId  || !amount || !weight || !distance) {
     const error = new Error('Missing fields');
     error.statusCode = 406;
     return next(error);
@@ -29,8 +30,9 @@ export const placeOrder = async (req, res, next) => {
     sender: sender,
     receiver: receiver,
     paymentId: paymentId,
-    isPaymentSuccessful: isPaymentSuccessful,
-    amount: amount
+    amount: amount,
+    weight:weight,
+    distance:distance
   });
   try {
     const result = await order.save();
@@ -47,8 +49,8 @@ export const placeOrder = async (req, res, next) => {
 };
 
 export const trackOrder = async (req, res, next) => {
-  const orderId = req.body.orderId;
   try {
+  const orderId = req.body.orderId;
     const order = await Order.findById(orderId);
     if (!order){
       const error = new Error('No such order found');
