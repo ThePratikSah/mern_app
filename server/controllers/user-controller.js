@@ -20,8 +20,8 @@ export const fetchPriceAndWeights = async (req, res, next) => {
 
 
 export const placeOrder = async (req, res, next) => {
-  const {sender, receiver, paymentId, amount, weight, distance} = req.body;
-  if (!sender || !receiver || !paymentId  || !amount || !weight || !distance) {
+  const {sender, receiver, paymentId, amount, weight, distance, additionalInfo, itemType} = req.body;
+  if (!sender || !receiver || !paymentId || !amount || !weight || !distance) {
     const error = new Error('Missing fields');
     error.statusCode = 406;
     return next(error);
@@ -31,8 +31,10 @@ export const placeOrder = async (req, res, next) => {
     receiver: receiver,
     paymentId: paymentId,
     amount: amount,
-    weight:weight,
-    distance:distance
+    weight: weight,
+    distance: distance,
+    additionalInfo: additionalInfo,
+    itemType: itemType
   });
   try {
     const result = await order.save();
@@ -50,9 +52,9 @@ export const placeOrder = async (req, res, next) => {
 
 export const trackOrder = async (req, res, next) => {
   try {
-  const orderId = req.body.orderId;
+    const orderId = req.body.orderId;
     const order = await Order.findById(orderId);
-    if (!order){
+    if (!order) {
       const error = new Error('No such order found');
       error.statusCode = 404;
       return next(error);
