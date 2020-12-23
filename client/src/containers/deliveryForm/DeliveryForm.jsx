@@ -10,6 +10,8 @@ import WeightComponent
 import PriceComponent
   from "../../components/ui/PriceComponent/PriceComponent.";
 import Spinner from "../../components/ui/Spinner/Spinner";
+import ItemDropDownComponent
+  from "../../components/ui/ItemDropDownComponent/ItemDropDownComponent";
 import UserContext from "../../context/UserContext";
 
 function DeliveryForm() {
@@ -42,6 +44,7 @@ function DeliveryForm() {
         email: user.senderEmail,
         phone: user.senderPhone,
         address: `${user.pickupLocation}, ${user.pickupStreet}, ${user.senderAddress}`,
+        landmark: user.pickupLandmark,
         time: pickupDate,
         location: {
           type: "Point",
@@ -53,12 +56,15 @@ function DeliveryForm() {
         email: user.receiverEmail,
         phone: user.receiverPhone,
         address: `${user.dropLocation}, ${user.dropStreet}, ${user.receiverAddress}`,
+        landmark: user.dropLandmark,
         time: dropDate,
         location: {
           type: "Point",
           coordinates: user.receiverCoordinates,
         },
       },
+      additionalInfo: user.additionalInfo,
+      itemType: user.itemType,
       paymentId: "paymentId12345",
       amount: user.amount ? user.amount : 50,
       weight: user.weight,
@@ -138,6 +144,15 @@ function DeliveryForm() {
             placeholder={"Street name/Locality name and Landmark"}
           />
           
+          {/* from landmark */}
+          <InputComponent
+            value={user.pickupLandmark}
+            name={"slandmark"}
+            labelText={"Landmark"}
+            type={"text"}
+            placeholder={"Landmark"}
+          />
+          
           {/* Pickup Date */}
           <InputComponent
             value={user.pickupDate}
@@ -196,6 +211,15 @@ function DeliveryForm() {
             placeholder={"Street name/Locality name and Landmark"}
           />
           
+          {/* to landmark */}
+          <InputComponent
+            value={user.dropLandmark}
+            name={"plandmark"}
+            labelText={"Landmark"}
+            type={"text"}
+            placeholder={"Landmark"}
+          />
+          
           {/* Drop Date */}
           <InputComponent
             value={user.dropDate}
@@ -214,10 +238,21 @@ function DeliveryForm() {
         </div>
       </div>
       
+      <div className={classes.DeliveryForm__additionalInfoBox}>
+        <InputComponent
+          type={"text"}
+          value={user.additionalInfo}
+          labelText={"Any delivery note"}
+          placeholder={"Any special information for us"}
+          name={"info"}
+        />
+        <ItemDropDownComponent />
+      </div>
+      
       <div className={classes.DeliveryForm__submit}>
         {loading ? <Spinner/> :
           <Button id={"btn"} onClick={formSubmitHandler}
-                  text={"Review Order"}/>}
+                  text={"Place COD"}/>}
         {user.success ? <Redirect to="/success"/> : null}
       </div>
       <PriceComponent

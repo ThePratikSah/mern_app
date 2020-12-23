@@ -41,6 +41,12 @@ function InputComponent({ name, labelText, type, value, placeholder }) {
           pickupStreet: value,
         });
         break;
+      case "slandmark":
+        setUser({
+          ...user,
+          pickupLandmark: value,
+        });
+        break;
       case "sdate":
         setUser({
           ...user,
@@ -51,7 +57,7 @@ function InputComponent({ name, labelText, type, value, placeholder }) {
         setUser({
           ...user,
           pickupTime: value,
-          stimePrice: (Number.parseInt(value.split(':')[0]) > 19 || Number.parseInt(value.split(':')[0]) < 5) ? 30 : 0,
+          stimePrice: 0,
         });
         break;
       case "pname":
@@ -84,6 +90,12 @@ function InputComponent({ name, labelText, type, value, placeholder }) {
           dropStreet: value,
         });
         break;
+      case "plandmark":
+        setUser({
+          ...user,
+          dropLandmark: value,
+        });
+        break;
       case "pdate":
         setUser({
           ...user,
@@ -95,6 +107,12 @@ function InputComponent({ name, labelText, type, value, placeholder }) {
           ...user,
           dropTime: value,
           ptimePrice: (Number.parseInt(value.split(':')[0]) > 19 || Number.parseInt(value.split(':')[0]) < 5) ? 30 : 0,
+        });
+        break;
+      case "info":
+        setUser({
+          ...user,
+          additionalInfo: value,
         });
         break;
       default:

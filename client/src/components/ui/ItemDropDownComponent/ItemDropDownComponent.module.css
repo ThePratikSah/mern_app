@@ -1,0 +1,9 @@
+.DeliveryForm__selectItemType {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 5px;
+  border: 0.5px #1e1e1e solid;
+  outline: none;
+}
