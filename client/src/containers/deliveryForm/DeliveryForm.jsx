@@ -10,6 +10,8 @@ import WeightComponent
 import PriceComponent
   from "../../components/ui/PriceComponent/PriceComponent.";
 import Spinner from "../../components/ui/Spinner/Spinner";
+import ItemDropDownComponent
+  from "../../components/ui/ItemDropDownComponent/ItemDropDownComponent";
 import UserContext from "../../context/UserContext";
 
 function DeliveryForm() {
@@ -61,6 +63,8 @@ function DeliveryForm() {
           coordinates: user.receiverCoordinates,
         },
       },
+      additionalInfo: user.additionalInfo,
+      itemType: user.itemType,
       paymentId: "paymentId12345",
       amount: user.amount ? user.amount : 50,
       weight: user.weight,
@@ -83,8 +87,6 @@ function DeliveryForm() {
         ...user,
         success: true,
       });
-      
-    //
     }
   };
   
@@ -208,7 +210,7 @@ function DeliveryForm() {
             type={"text"}
             placeholder={"Street name/Locality name and Landmark"}
           />
-  
+          
           {/* to landmark */}
           <InputComponent
             value={user.dropLandmark}
@@ -236,10 +238,21 @@ function DeliveryForm() {
         </div>
       </div>
       
+      <div className={classes.DeliveryForm__additionalInfoBox}>
+        <InputComponent
+          type={"text"}
+          value={user.additionalInfo}
+          labelText={"Any delivery note"}
+          placeholder={"Any special information for us"}
+          name={"info"}
+        />
+        <ItemDropDownComponent />
+      </div>
+      
       <div className={classes.DeliveryForm__submit}>
         {loading ? <Spinner/> :
           <Button id={"btn"} onClick={formSubmitHandler}
-                  text={"Review Order"}/>}
+                  text={"Place COD"}/>}
         {user.success ? <Redirect to="/success"/> : null}
       </div>
       <PriceComponent

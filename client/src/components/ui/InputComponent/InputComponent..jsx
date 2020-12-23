@@ -109,6 +109,12 @@ function InputComponent({ name, labelText, type, value, placeholder }) {
           ptimePrice: (Number.parseInt(value.split(':')[0]) > 19 || Number.parseInt(value.split(':')[0]) < 5) ? 30 : 0,
         });
         break;
+      case "info":
+        setUser({
+          ...user,
+          additionalInfo: value,
+        });
+        break;
       default:
         break;
     }

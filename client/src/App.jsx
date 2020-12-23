@@ -37,6 +37,8 @@ function App() {
     receiverCoordinates: [],
     distance: undefined,
     weight: undefined,
+    additionalInfo: "",
+    itemType: "",
     paymentId: "",
     weightPrice: 0,
     distancePrice: 0,

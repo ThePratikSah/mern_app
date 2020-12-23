@@ -28,12 +28,14 @@ p, h2, span {
 }
 
 button {
+  display: block;
   width: 180px;
   height: 40px;
-  margin: 10px;
+  margin: 10px auto;
   background-color: #7a29e4;
   color: #f1f1f1;
   border-radius: 5px;
   border: none;
   cursor: pointer;
+  outline: none;
 }
