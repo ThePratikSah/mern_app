@@ -31,6 +31,10 @@ const Address = new Schema({
     type: String,
     required: true
   },
+  landmark: {
+    type: String,
+    required: true
+  },
   time: {
     type: Date,
     default: Date.now
@@ -48,6 +52,13 @@ const orderSchema = new Schema({
   isDriverAssigned: {
     type: Boolean,
     default: false
+  },
+  additionalInfo:{
+    type:String
+  },
+  itemType:{
+    type:String,
+    default:'UNSPECIFIED'
   },
   amount: {
     type: Number,
