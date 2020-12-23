@@ -168,6 +168,8 @@ function DeliveryForm() {
             labelText={"Time"}
             type={"time"}
           />
+          <ItemDropDownComponent />
+
         </div>
         <div className={classes.form}>
           {/* name of receiver */}
@@ -235,18 +237,20 @@ function DeliveryForm() {
             labelText={"Time"}
             type={"time"}
           />
+  
+          {/* Any additional note */}
+          <InputComponent
+            type={"text"}
+            value={user.additionalInfo}
+            labelText={"Any delivery note"}
+            placeholder={"Any special information for us"}
+            name={"info"}
+          />
         </div>
       </div>
       
       <div className={classes.DeliveryForm__additionalInfoBox}>
-        <InputComponent
-          type={"text"}
-          value={user.additionalInfo}
-          labelText={"Any delivery note"}
-          placeholder={"Any special information for us"}
-          name={"info"}
-        />
-        <ItemDropDownComponent />
+      
       </div>
       
       <div className={classes.DeliveryForm__submit}>

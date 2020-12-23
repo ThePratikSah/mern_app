@@ -7,3 +7,7 @@
   border: 0.5px #1e1e1e solid;
   outline: none;
 }
+
+.DeliveryForm__label {
+  font-weight: 400;
+}

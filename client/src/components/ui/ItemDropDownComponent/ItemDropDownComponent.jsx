@@ -17,16 +17,20 @@ function ItemDropDownComponent() {
   }
   
   return (
-    <select name="items" onChange={selectHandler}
-            className={classes.DeliveryForm__selectItemType}>
-      <option selected disabled>Choose one</option>
-      <option value="Laundry/Clothes">Laundry/Clothes</option>
-      <option value="Lunch box">Lunch box</option>
-      <option value="Charger">Charger</option>
-      <option value="Documents">Documents</option>
-      <option value="Keys">Keys</option>
-      <option value="Others">Others</option>
-    </select>
+    <div>
+      <label
+        className={classes.DeliveryForm__label}>What items are you sending</label>
+      <select name="items" onChange={selectHandler}
+              className={classes.DeliveryForm__selectItemType}>
+        <option selected disabled>Choose one</option>
+        <option value="Laundry/Clothes">Laundry/Clothes</option>
+        <option value="Lunch box">Lunch box</option>
+        <option value="Charger">Charger</option>
+        <option value="Documents">Documents</option>
+        <option value="Keys">Keys</option>
+        <option value="Others">Others</option>
+      </select>
+    </div>
   );
 }
 
