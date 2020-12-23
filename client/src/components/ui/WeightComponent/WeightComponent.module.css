@@ -7,6 +7,13 @@
   align-items: center;
 }
 
+.span {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
 .WeightComponent > span {
   padding: 10px 20px;
   color: #7a29e4;

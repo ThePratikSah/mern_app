@@ -1,0 +1,141 @@
+.OrderWeight {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px 20px;
+  margin: 0 20px;
+  background-color: tomato;
+  color: #f1f1f1;
+  font-weight: 600;
+  text-align: center;
+  border-radius: 5px 5px 0 0;
+}
+
+.OrderSummary__parent {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+
+.OrderSummary__cardParent {
+  display: flex;
+  flex-direction: column;
+}
+
+.OrderSummary__card {
+  display: flex;
+  max-width: 300px;
+  border: 1px solid #7a29e4;
+  border-top: 5px solid #7a29e4;
+  border-radius: 5px;
+  background-color: rgba(122, 41, 228, 0.1);
+  padding: 10px;
+  flex-direction: column;
+  box-shadow: 0 3px 2px rgba(122, 41, 228, 0.4);
+}
+
+.OrderSummary__cardHeader {
+  font-weight: 400;
+}
+
+.OrderSummary__cardDetails {
+  display: flex;
+  flex-direction: column;
+}
+
+.OrderSummary__cardDetailsSender {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  justify-content: start;
+  position: relative;
+  border-top: 3px solid tomato;
+}
+
+.sender, .receiver {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: #ff6347;
+  padding: 8px;
+  border-radius: 0px 0px 5px 5px;
+  color: #f1f1f1;
+  box-shadow: 0 3px 2px rgba(255, 99, 71, 0.2);
+}
+
+.receiver {
+  background-color: #7a29e4;
+  box-shadow: 0 3px 2px rgba(122, 41, 228, 0.2);
+}
+
+.OrderSummary__cardDetailsReceiver {
+  display: flex;
+  flex-direction: column-reverse;
+  flex: 1;
+  justify-content: start;
+  position: relative;
+  border-top: 3px solid #7a29e4;
+}
+
+.OrderSummary__cardDetailsSenderPersonalInfo,
+.OrderSummary__cardDetailsReceiverPersonalInfo {
+  display: flex;
+  flex-direction: column;
+  padding: 10px 0;
+}
+
+.OrderSummary__cardDetailsName {
+  font-weight: 500;
+  letter-spacing: 1px;
+}
+
+.OrderSummary__cardDetailsPhone {
+  font-weight: 700;
+  margin-bottom: 3px;
+  color: #474747;
+}
+
+.OrderSummary__cardDetailsEmail {
+  font-weight: 300;
+}
+
+.OrderSummary__cardDetailsAddress {
+  font-size: 22px;
+}
+
+.OrderSummary__cardDetailsName,
+.OrderSummary__cardDetailsPhone,
+.OrderSummary__cardDetailsEmail,
+.OrderSummary__cardDetailsAddress {
+  font-size: 14px;
+}
+
+.OrderSummary__cardDetailsSenderDateTime,
+.OrderSummary__cardDetailsReceiverDateTime{
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  font-weight: 600;
+  background-color: #3700b3;
+  padding: 10px;
+  border-radius: 5px;
+  color: #ffffff;
+  margin-bottom: 10px;
+  box-shadow: 0 3px 2px rgba(55, 0, 179, 0.2);
+
+}
+
+.OrderSummary__cardDetailsReceiverDateTime {
+  background-color: #7a29e4;
+  box-shadow: 0 3px 2px rgba(122, 41, 228, 0.2);
+}
+
+.HorizontalSeparation {
+  color: #707070;
+  background-color: #707070;
+  width: 50%;
+  margin: 15px auto;
+  text-decoration: none;
+}
