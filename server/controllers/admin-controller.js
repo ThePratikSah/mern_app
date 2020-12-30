@@ -6,6 +6,8 @@ import PriceAndWeight from '../models/priceAndWeight.js';
 
 import Orders from '../models/orders.js';
 
+import BuyForMe from '../models/buyForMe.js';
+
 //function to create price and weight
 export const createPriceAndWeight = async (req, res, next) => {
   try {
@@ -138,7 +140,37 @@ export const getSortedOrders = async (req, res, next) => {
   }
 };
 
-//
+//get all buy for me orders
+export const getAllBuyForMe = async (req, res, next) => {
+  try {
+    let {fromDate, toDate} = req.body;
+    const skip = parseInt(req.body.skip);
+    const limit = parseInt(req.body.limit);
+    let filter;
+    const totalBuyForMeOrders = await BuyForMe.find().countDocuments();
+    if (!fromDate || !toDate) {
+      const buyForMeOrders = await BuyForMe.find().sort({createdAt: -1}).skip(skip).limit(limit);
+      res.status(200).json({
+        message: 'All buy for me orders fetched',
+        orders: buyForMeOrders,
+        total: totalBuyForMeOrders,
+      });
+      return;
+    }
+    filter = {createdAt: {$lte: fromDate, $gte: toDate}};
+    const buyForMeOrders = await Orders.find(filter).sort({createdAt: -1}).skip(skip).limit(limit);
+    res.status(200).json({
+      message: 'Filtered orders fetched',
+      total: totalBuyForMeOrders,
+      orders: buyForMeOrders,
+    });
+  } catch (err) {
+    if (!err.statusCode) {
+      err.statusCode = 500;
+    }
+    next(err);
+  }
+};
 
 //function to confirm payment of an order manually using an orderId
 export const confirmOrderPayment = async (req, res, next) => {

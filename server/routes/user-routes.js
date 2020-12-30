@@ -12,4 +12,7 @@ router.get('/fetch/price-weights',userController.fetchPriceAndWeights);
 //create a new order
 router.post('/create/order',userController.placeOrder);
 
+//Place a buy for me order
+router.post('/create/buy-for-me', userController.placeBuyForMeOrder);
+
 export default router;

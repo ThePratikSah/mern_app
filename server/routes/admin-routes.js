@@ -10,6 +10,9 @@ import expressValidator from "express-validator";
 //get all orders
 router.get('/orders', isAdmin, adminController.getAllOrders);
 
+//get all buy for me
+router.get('/buy-for-me', isAdmin, adminController.getAllBuyForMe);
+
 //get sorted orders and all orders
 router.post('/orders', isAdmin, adminController.getSortedOrders);
 

@@ -2,6 +2,8 @@ import PriceAndWeight from '../models/priceAndWeight.js';
 
 import Order from '../models/orders.js';
 
+import BuyForMe from '../models/buyForMe.js';
+
 //function to fetch all price and weights
 export const fetchPriceAndWeights = async (req, res, next) => {
   try {
@@ -43,6 +45,39 @@ export const placeOrder = async (req, res, next) => {
       result: result
     });
   } catch (err) {
+    if (!err.statusCode) {
+      err.statusCode = 500;
+    }
+    next(err);
+  }
+};
+
+export const placeBuyForMeOrder = async (req, res, next) => {
+  const {receiver, items, shop, approximateCost, additionalInfo, itemType, amount, weight, distance } = req.body;
+  const image = req.file;
+  let imageUrl ='';
+  if(image) {
+    imageUrl = req.file.path;
+  }
+  const buyForMe = new BuyForMe({
+    receiver: receiver,
+    items: items,
+    shop: shop,
+    approximateCost: approximateCost,
+    additionalInfo: additionalInfo,
+    itemType: itemType,
+    amount: amount,
+    weight: weight,
+    distance: distance,
+    imageUrl: imageUrl
+  });
+  try{
+    const result = await buyForMe.save();
+    res.status(201).json({
+      message: 'Buy for me ordered successfully',
+      result: result
+    });
+  }catch (err) {
     if (!err.statusCode) {
       err.statusCode = 500;
     }

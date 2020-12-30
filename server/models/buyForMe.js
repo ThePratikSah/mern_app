@@ -66,10 +66,6 @@ const buyForMeSchema = new Schema({
     type: Number,
     required: true
   },
-  paymentId: {
-    type: String,
-    required: true,
-  },
   isDriverAssigned: {
     type: Boolean,
     default: false
@@ -96,6 +92,9 @@ const buyForMeSchema = new Schema({
   driver: {
     type: Schema.Types.ObjectId,
     ref: 'Driver',
+  },
+  imageUrl:{
+    type:String,
   }
 }, {
   timestamps: true

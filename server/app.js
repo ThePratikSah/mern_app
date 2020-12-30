@@ -1,6 +1,5 @@
 //node core modules
 import path from 'path';
-import https from 'https';
 
 //installed modules
 import express from 'express';
@@ -9,7 +8,6 @@ import multer from 'multer';
 import helmet from 'helmet';
 import compression from 'compression';
 import dotenv from 'dotenv';
-
 //disable in production
 dotenv.config();
 
