@@ -1,16 +1,20 @@
 import React, {useState} from "react";
 import classes from "./BuyForMe.module.css";
 import Button from "../../components/ui/button/Button";
-import InputComponent from "../../components/ui/InputComponent/InputComponent.";
+import InputComponent
+  from "../../components/ui/InputComponent/InputComponent.";
 import {geocodeByAddress, getLatLng} from "react-places-autocomplete";
-import InputPlacesComponent from "../locationPoint/InputPlacesComponent/InputPlacesComponent";
+import InputPlacesComponent
+  from "../locationPoint/InputPlacesComponent/InputPlacesComponent";
+import WeightComponent
+  from "../../components/ui/WeightComponent/WeightComponent.";
 
 function BuyForMe() {
-
+  
   //states
   const [shopAddress, setShopAddress] = useState("");
   const [finalAddress, setFinalAddress] = useState("");
-
+  
   // useEffect(() => {
   //   document.querySelector("#distance").innerHTML = `Book Now @ ${
   //     distance["value"] <= 5000
@@ -18,24 +22,24 @@ function BuyForMe() {
   //       : 40 + ((distance["value"] - 5000) / 1000) * 10
   //   }₹`;
   // });
-
+  
   const [initialCoordinates, setInitialCoordinates] = useState({
     lat: null,
     lng: null,
   });
-
+  
   const [finalCoordinates, setFinalCoordinates] = useState({
     lat: null,
     lng: null,
   });
-
+  
   const initialHandleSelect = async (valueInitial) => {
     const resInitial = await geocodeByAddress(valueInitial);
     let latLngInitial = await getLatLng(resInitial[0]);
     setShopAddress(valueInitial);
     setInitialCoordinates(latLngInitial);
   };
-
+  
   const finalHandleSelect = async (valueFinal) => {
     const resFinal = await geocodeByAddress(valueFinal);
     let latLngFinal = await getLatLng(resFinal[0]);
@@ -74,42 +78,108 @@ function BuyForMe() {
       console.log(e.message);
     }
   };
-
+  
   return (
     <div className={classes.BuyForMe}>
       <h1 className={classes.BuyForMe__header}>Buy For Me</h1>
       <span className={classes.BuyForMe__headerSpan}>
         Our delivery agent will go through the store and buy the product
       </span>
-        <div className={classes.form__group}>
-          {/* from where to buy */}
-          <div className={classes.BuyForMe__inputGroup}>
-            <InputPlacesComponent labelText={"Choose store Location"} inputId={"originId"} onSelect={initialHandleSelect} onChange={setShopAddress} value={shopAddress} />
-            {/* shop name */}
-            <InputComponent type={"text"} labelText={""} placeholder={"Shop Name"} />
-          </div>
-          <div className={classes.BuyForMe__inputGroup}>
-            {/* what to buy */}
-            <InputComponent labelText={"What to buy"} placeholder={"Enter the list of items seperated by comma"} />
-          </div>
-          <div className={classes.BuyForMe__inputGroup}>
-            <InputComponent type={"number"} labelText={"Approximate cost"} placeholder={"₹"} />
-          </div>
-          <div className={classes.BuyForMe__inputGroup}>
-            {/* delivery location */} {/* name */}
-            <InputPlacesComponent labelText={"Where to deliver the items"} inputId={"destinationId"} onChange={setFinalAddress} onSelect={finalHandleSelect} value={finalAddress} />
-          </div>
-          <div className={classes.BuyForMe__inputGroup}>
-            {/* contact number */}
-            <InputComponent labelText={"Delivery location"} type={"text"} placeholder={"House No. & Street Name"} />
-          </div>
-          <InputComponent labelText={"Landmark"} type={"text"} placeholder={"Landmark"} />
-          <InputComponent labelText={"Contact No."} placeholder={"987-654-3210"} type={"tel"} />
-
+      <WeightComponent/>
+      <div className={classes.form__group}>
+        <div className={classes.BuyForMe__inputGroup}>
+          {/* what to buy */}
+          <InputComponent labelText={"What to buy"}
+                          placeholder={"Enter the list of items seperated by comma"}/>
         </div>
-        <div className={classes.BuyForMe__submit}>
-          <Button onClick={fetchLocation} text={"Proceed to pay"} id={"btn"}/>
+        <div className={classes.BuyForMe__inputGroup}>
+          {/* From any specific shop */}
+          <InputComponent labelText={"From any specific shop"}
+                          placeholder={"Enter shop name (optional)"}/>
         </div>
+        <div className={classes.BuyForMe__inputGroup}>
+          {/* address */}
+          <InputComponent labelText={"Address"}
+                          placeholder={"Address"}/>
+        </div>
+        <div className={classes.BuyForMe__inputGroup}>
+          {/* Area */}
+          <InputComponent labelText={"Area"}
+                          placeholder={"Area"}/>
+        </div>
+        <div className={classes.BuyForMe__inputGroup}>
+          {/* Street */}
+          <InputComponent labelText={"Street"}
+                          placeholder={"Street"}/>
+        </div>
+        <div className={classes.BuyForMe__inputGroup}>
+          {/* Landmark */}
+          <InputComponent labelText={"Landmark"}
+                          placeholder={"Landmark"}/>
+        </div>
+        {/* from where to buy */}
+        <div className={classes.BuyForMe__inputGroup}>
+          <InputPlacesComponent labelText={"Pickup point landmark (Choose from Google Map)"}
+                                inputId={"originId"}
+                                onSelect={initialHandleSelect}
+                                onChange={setShopAddress}
+                                value={shopAddress}/>
+        </div>
+        <div className={classes.BuyForMe__inputGroup}>
+          <InputComponent type={"number"}
+                          labelText={"Approximate cost"}
+                          placeholder={"₹"}/>
+        </div>
+        <strong>Where to deliver the items</strong>
+        <div className={classes.BuyForMe__inputGroup}>
+          {/* contact number */}
+          <InputComponent labelText={"Full Name"}
+                          type={"text"}
+                          placeholder={"Full Name"}/>
+        </div>
+        <div className={classes.BuyForMe__inputGroup}>
+          {/* contact number */}
+          <InputComponent labelText={"Delivery Address"}
+                          type={"text"}
+                          placeholder={"House No. & Street Name"}/>
+        </div>
+        <div className={classes.BuyForMe__inputGroup}>
+          {/* contact number */}
+          <InputComponent labelText={"Street No"}
+                          type={"text"}
+                          placeholder={"Street Number"}/>
+        </div>
+        <div className={classes.BuyForMe__inputGroup}>
+          {/* contact number */}
+          <InputComponent labelText={"Landmark"}
+                          type={"text"}
+                          placeholder={"Landmark"}/>
+        </div>
+        <div className={classes.BuyForMe__inputGroup}>
+          {/* delivery location */} {/* name */}
+          <InputPlacesComponent
+            labelText={"Drop Point landmark (Choose from Google Map)"}
+            inputId={"destinationId"} onChange={setFinalAddress}
+            onSelect={finalHandleSelect} value={finalAddress}/>
+        </div>
+        <InputComponent labelText={"10 digit mobile no."} type={"text"}
+                        placeholder={"987-654-3210"}/>
+        <InputComponent labelText={"Delivery Date"} type={"date"}
+                        placeholder={"987-654-3210"}/>
+        <InputComponent labelText={"Delivery Time"} type={"time"}
+                        placeholder={"987-654-3210"}/>
+        <InputComponent labelText={"Any delivery note"} type={"text"}
+                        placeholder={"Any instructions for" +
+                        " delivery partner"}/>
+        <InputComponent labelText={"Do you have a list of items to" +
+        " orders"} type={"file"}
+                        placeholder={"987-654-3210"}/>
+      
+      </div>
+      <div className={classes.BuyForMe__submit}>
+        <Button onClick={fetchLocation} text={"Proceed to pay"}
+                id={"btn"}/>
+      </div>
     </div>
   );
 }
