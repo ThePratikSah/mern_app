@@ -7,9 +7,9 @@ import mongoose from 'mongoose';
 import multer from 'multer';
 import helmet from 'helmet';
 import compression from 'compression';
-import dotenv from 'dotenv';
+// import dotenv from 'dotenv';
 //disable in production
-dotenv.config();
+// dotenv.config();
 
 // PORT
 const port = process.env.PORT || 3300;
